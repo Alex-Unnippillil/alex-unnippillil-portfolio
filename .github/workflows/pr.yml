@@ -27,6 +27,9 @@ jobs:
       - name: Run eslint
         run: yarn lint
 
+      - name: Check route capabilities
+        run: yarn check:route-capabilities
+
       - name: Run tests
         run: yarn test --coverage
 
