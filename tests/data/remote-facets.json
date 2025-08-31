@@ -1,0 +1,4 @@
+[
+  { "id": 1, "facets": ["greeting"] },
+  { "id": 3, "text": "remote hydrated data", "facets": ["remote"] }
+]
