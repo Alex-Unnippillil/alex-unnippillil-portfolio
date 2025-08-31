@@ -39,7 +39,7 @@
     position: absolute;
     top: 50%;
     max-width: calc(50% - (50px / 2));
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--border);
   }
   &::before {
     right: calc(50% + (50px / 2));
@@ -53,10 +53,10 @@
 
 .btn-more {
   margin: 0;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
   overflow: visible;
   font: inherit;
-  color: #333;
+  color: var(--muted);
   border-radius: 0;
   display: inline-block;
   box-sizing: border-box;
@@ -73,7 +73,7 @@
   transition-property: color,background-color,border-color;
   &:hover {
     background-color: transparent;
-    color: #333;
-    border-color: #b2b2b2;
+    color: var(--muted);
+    border-color: var(--border);
   }
 }
