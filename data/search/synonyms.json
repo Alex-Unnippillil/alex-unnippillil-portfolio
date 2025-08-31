@@ -1,0 +1,5 @@
+{
+  "javascript": ["js", "node"],
+  "repository": ["repo", "repos", "repositories"],
+  "typescript": ["ts", "type-script"]
+}
