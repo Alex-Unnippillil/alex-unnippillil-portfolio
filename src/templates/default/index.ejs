@@ -46,9 +46,10 @@ function generateRepositoriesHtml(repositories) {
 %>
 
 <html <%= require('../_common/templates/html-attributes.ejs')({ templateName: 'default' }) %>>
-<head>
-  <%= require('../_common/templates/header/full.ejs')() %>
-  <style>
+  <head>
+    <%= require('../_common/templates/header/full.ejs')() %>
+    <%- app.externalStylesTags %>
+    <style>
     .avatar--image {
       background: url(<%= resolveFile(config.data.avatar) %>);
     }
@@ -56,8 +57,8 @@ function generateRepositoriesHtml(repositories) {
       background: url(<%= resolveFile(config.templates.default.configuration.background) %>);
     }
   </style>
-</head>
-<body>
+  </head>
+  <body>
 <header class="header">
   <div class="header__background background--image"></div>
   <div class="header__wrap">
@@ -110,8 +111,8 @@ function generateRepositoriesHtml(repositories) {
   }) %></span>
 </footer>
 
-<% if (canShowMoreRepositories) {%>
-<script type="text/javascript">
+  <% if (canShowMoreRepositories) {%>
+  <script nonce="<%= app.cspNonce %>" type="text/javascript">
 var repositories = <%= JSON.stringify(repositories.splice(repositoriesMore)) %>;
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -136,7 +137,8 @@ function htmlToElements(html) {
 }
 
 <%= generateRepositoriesHtml.toString() %>
-</script>
-<% } %>
-</body>
-</html>
+  </script>
+  <% } %>
+  <%- app.externalScriptsTags %>
+  </body>
+  </html>

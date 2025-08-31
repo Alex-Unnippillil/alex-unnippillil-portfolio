@@ -7,4 +7,9 @@ export default interface IApplication {
   template: ITemplate
 
   url: string
+
+  /**
+   * Content Security Policy nonce for inline scripts.
+   */
+  cspNonce: string
 }

@@ -3,6 +3,8 @@
 
 const { di } = require('../../../di');
 const { TYPES } = require('../../../types');
+const crypto = require('crypto');
+const fs = require('fs');
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
@@ -43,6 +45,26 @@ const app = di.get(TYPES.Application);
 
 
 const { config } = app;
+function generateIntegrity(file) {
+  try {
+    const content = fs.readFileSync(file);
+    return `sha384-${crypto.createHash('sha384').update(content).digest('base64')}`;
+  } catch (e) {
+    return '';
+  }
+}
+
+const meta = config.global.meta || {};
+const externalScripts = (meta.externalScripts || []).map((src) => {
+  const integrity = generateIntegrity(src);
+  return `<script src="${src}"${integrity ? ` integrity=\"${integrity}\" crossorigin=\"anonymous\"` : ''}></script>`;
+});
+const externalStyles = (meta.externalStyles || []).map((href) => {
+  const integrity = generateIntegrity(href);
+  return `<link rel="stylesheet" href="${href}"${integrity ? ` integrity=\"${integrity}\" crossorigin=\"anonymous\"` : ''}/>`;
+});
+app.externalScriptsTags = externalScripts.join('\n');
+app.externalStylesTags = externalStyles.join('\n');
 const lang = config.global.locale.split('_')[0];
 %>
 

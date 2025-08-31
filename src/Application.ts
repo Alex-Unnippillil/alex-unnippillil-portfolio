@@ -21,6 +21,8 @@ export default class Application implements IApplication {
 
   private siteUrl: string;
 
+  public cspNonce = '';
+
   constructor(
   @inject(TYPES.UserData) userData: IConfig,
     @multiInject(TYPES.Services) services: IService[],
@@ -106,6 +108,10 @@ export default class Application implements IApplication {
       opg: {},
       pwa: null,
       meta: {},
+      features: {
+        sharedArrayBuffer: false,
+        wasm: false,
+      },
       www: {
         domain: '',
         path: '',
