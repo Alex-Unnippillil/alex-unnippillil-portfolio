@@ -1,7 +1,7 @@
 .repositories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
+  grid-gap: calc(var(--space-5) * var(--density));
   flex-wrap: wrap;
   @media only screen and (max-width: 1440px) {
     grid-template-columns: repeat(3, 1fr);
@@ -20,7 +20,7 @@
   color: rgba(0, 0, 0, .9);
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 15px 12px;
+  padding: calc(var(--space-4) * var(--density)) calc(var(--space-3) * var(--density));
   box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
   &__name {
     color: #474a73;
@@ -28,7 +28,7 @@
     font-weight: bold;
   }
   &__description {
-    margin: 15px 0;
+    margin: calc(var(--space-4) * var(--density)) 0;
     line-height: 1.5;
     color: rgba(0, 0, 0, .7);
     height: 100%;
@@ -49,11 +49,11 @@
       display: flex;
       align-items: center;
       &:not(:last-child) {
-        margin-right: 15px;
+        margin-right: calc(var(--space-4) * var(--density));
       }
       svg {
-        width: 15px;
-        margin-right: 5px;
+        width: var(--space-4);
+        margin-right: calc(var(--space-1) * var(--density));
       }
     }
   }

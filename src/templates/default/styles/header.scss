@@ -1,7 +1,7 @@
 .header {
   position: relative;
-  min-height: 500px;
-  padding: 70px 20px;
+  min-height: var(--space-125);
+  padding: calc(var(--space-18) * var(--density)) var(--space-5);
   &__background {
     position: absolute;
     top: 0;
@@ -26,18 +26,18 @@
   &__wrap {
     text-align: center;
     &__image {
-      width: 200px;
-      height: 200px;
+      width: var(--space-50);
+      height: var(--space-50);
       margin: 0 auto;
-      border-radius: 20px;
+      border-radius: var(--space-5);
       background-position: 50% 50%;
       background-repeat: no-repeat;
       background-size: cover;
     }
     &__name {
-      margin: 35px 0 5px;
+      margin: calc(var(--space-9) * var(--density)) 0 calc(var(--space-1) * var(--density));
       color: #fff;
-      text-shadow: 0 0 5px #000;
+      text-shadow: 0 0 var(--space-1) #000;
       font-weight: 600;
       font-size: 2.4rem;
       letter-spacing: 1px;
@@ -47,7 +47,7 @@
     }
     &__position {
       display: block;
-      margin-top: 20px;
+      margin-top: calc(var(--space-5) * var(--density));
       color: rgba(255, 255, 255, .95);
       font-size: 1.3rem;
       font-weight: bold;
@@ -56,21 +56,21 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 30px;
+      margin-top: calc(var(--space-8) * var(--density));
       a {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 35px;
-        height: 35px;
-        padding: 9px;
-        margin: 0 7px;
+        width: calc(var(--space-9) * var(--density));
+        height: calc(var(--space-9) * var(--density));
+        padding: calc(var(--space-2) * var(--density));
+        margin: 0 calc(var(--space-2) * var(--density));
         color: #fff;
         transition: .2s;
-        min-width: 35px;
+        min-width: calc(var(--space-9) * var(--density));
         &:hover {
           background: rgba(0, 0, 0, .5);
-          border-radius: 10px;
+          border-radius: calc(var(--space-2) * var(--density));
         }
       }
       svg {
