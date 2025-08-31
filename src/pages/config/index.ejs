@@ -55,35 +55,39 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</section>-->
-<section>
-    <div class="section--name">
-        Global
-    </div>
-    <div class="section--items">
-        <div class="block">
-            <div class="block--label">
-                Template
+<form id="configForm">
+    <section>
+        <div class="section--name">
+            Global
+        </div>
+        <div class="section--items">
+            <div class="block">
+                <div class="block--label">
+                    Template
+                </div>
+                <div class="block--input">
+                    <input name="template"/>
+                </div>
+                <div class="block--description">
+                    Select an existing template
+                </div>
             </div>
-            <div class="block--input">
-                <input/>
-            </div>
-            <div class="block--description">
-                Select an existing template
+            <div class="block">
+                <div class="block--label">
+                    Base
+                </div>
+                <div class="block--input">
+                    <input name="base"/>
+                </div>
+                <div class="block--description">
+                    If the repository is called: &lt;username&gt;.github.io. Then the value is empty
+                    If the repository is called: portfolio, or any other name. Then the value of &lt;name of repository&gt;
+                </div>
             </div>
         </div>
-        <div class="block">
-            <div class="block--label">
-                Base
-            </div>
-            <div class="block--input">
-                <input/>
-            </div>
-            <div class="block--description">
-                If the repository is called: &lt;username&gt;.github.io. Then the value is empty
-                If the repository is called: portfolio, or any other name. Then the value of &lt;name of repository&gt;
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+    <div id="merge"></div>
+    <button type="submit">Save</button>
+</form>
 </body>
 </html>
