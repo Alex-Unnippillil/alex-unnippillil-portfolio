@@ -1,0 +1,26 @@
+name: Speed Insights Budget
+
+on:
+  deployment_status:
+
+jobs:
+  budget:
+    if: github.event.deployment_status.state == 'success' && startsWith(github.event.deployment.environment, 'Preview')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install deps
+        run: yarn --frozen-lockfile
+
+      - name: Run Speed Insights budget check
+        run: node scripts/speed-insights-budget.js
+        env:
+          DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
+          SPEED_INSIGHTS_TOKEN: ${{ secrets.SPEED_INSIGHTS_TOKEN }}
