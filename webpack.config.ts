@@ -57,6 +57,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
             {
               loader: 'file-loader',
               options: {
+                name: '[name].[contenthash].[ext]',
                 outputPath: 'static/images',
               },
             },
@@ -68,6 +69,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
             {
               loader: 'file-loader',
               options: {
+                name: '[name].[contenthash].[ext]',
                 outputPath: 'static/files',
               },
             },
@@ -111,8 +113,8 @@ export default (env: any, argv: { mode: string; }): Configuration => {
       ],
     },
     output: {
-      chunkFilename: 'static/js/[name].[fullhash].js',
-      filename: 'static/[name].[fullhash].js',
+      chunkFilename: 'static/js/[name].[contenthash].js',
+      filename: 'static/js/[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
       publicPath: '/',
     },
@@ -148,8 +150,8 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         },
       }),
       new MiniCssExtractPlugin({
-        chunkFilename: 'static/css/[name].[fullhash].css',
-        filename: 'static/[name].[fullhash].css',
+        chunkFilename: 'static/css/[name].[contenthash].css',
+        filename: 'static/css/[name].[contenthash].css',
       }),
     ] as WebpackPluginInstance[],
     resolve: {
