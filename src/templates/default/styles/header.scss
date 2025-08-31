@@ -9,10 +9,12 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    will-change: background-position;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     &:before {
       content: "";
       position: absolute;
@@ -30,9 +32,8 @@
       height: 200px;
       margin: 0 auto;
       border-radius: 20px;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: cover;
+      object-fit: cover;
+      display: block;
     }
     &__name {
       margin: 35px 0 5px;
