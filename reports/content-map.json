@@ -1,0 +1,14 @@
+{
+  "https://example.com": {
+    "url": "https://example.com",
+    "title": "Example Domain",
+    "meta": {
+      "description": null,
+      "ogTitle": null,
+      "ogDescription": null,
+      "ogImage": null
+    },
+    "imagesMissingAlt": 0,
+    "internalLinks": []
+  }
+}
