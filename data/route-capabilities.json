@@ -1,0 +1,10 @@
+{
+  "/": {
+    "owner": "core",
+    "reviewer": "core"
+  },
+  "/admin/route-audit": {
+    "owner": "core",
+    "reviewer": "core"
+  }
+}
