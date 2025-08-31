@@ -1,0 +1,5 @@
+{
+  "static/js/main.js": ["core"],
+  "static/css/main.css": ["core"],
+  "static/images/logo.png": ["images", "brand"]
+}
