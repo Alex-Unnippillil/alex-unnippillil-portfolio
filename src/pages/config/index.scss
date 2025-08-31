@@ -1,1 +1,10 @@
 @import "styles/global";
+
+body.privacy-mode [data-sensitive] {
+  filter: blur(5px);
+}
+
+body.privacy-mode [data-mask] {
+  color: transparent;
+  text-shadow: 0 0 5px #000;
+}
