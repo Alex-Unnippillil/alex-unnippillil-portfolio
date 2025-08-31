@@ -1,0 +1,6 @@
+{
+  "name": "Sample App",
+  "icon": "sample.png",
+  "category": "utilities",
+  "permissions": ["storage"]
+}
