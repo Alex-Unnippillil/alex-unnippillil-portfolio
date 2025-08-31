@@ -32,7 +32,9 @@
     "release": "yarn standard-version",
     "github:profile": "ts-node ./src/services/github/utils/profile.ts",
     "github:repositories": "ts-node ./src/services/github/utils/repositories.ts",
-    "test": "jest"
+    "test": "jest",
+    "lint:tokens": "ts-node ./scripts/contrast-lint.ts",
+    "lint:tokens:fix": "ts-node ./scripts/contrast-lint.ts --fix"
   },
   "browserslist": [
     "defaults",
