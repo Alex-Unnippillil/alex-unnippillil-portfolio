@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "strict": true,
+    "jsx": "react-jsx",
   },
   "exclude": [
     "node_modules",
