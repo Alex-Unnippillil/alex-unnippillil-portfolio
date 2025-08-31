@@ -24,9 +24,13 @@
   },
   "license": "MIT",
   "author": "Alexey Khrushch <alexeykhr@outlook.com>",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "webpack serve --hot --progress --mode=development",
-    "build": "webpack --mode=production",
+    "build": "next build",
+    "postbuild": "next-sitemap || true",
     "lint": "eslint --ext .js,.ts .",
     "lint:fix": "yarn lint --fix",
     "release": "yarn standard-version",
