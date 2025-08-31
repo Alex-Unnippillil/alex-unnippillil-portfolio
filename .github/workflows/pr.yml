@@ -24,6 +24,9 @@ jobs:
       - name: Install packages
         run: yarn
 
+      - name: Verify release checklist
+        run: yarn checklist:verify
+
       - name: Run eslint
         run: yarn lint
 
