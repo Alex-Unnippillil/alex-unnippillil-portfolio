@@ -1,2 +1,4 @@
 *
 !.gitignore
+!email-samples/
+!email-samples/*.json
