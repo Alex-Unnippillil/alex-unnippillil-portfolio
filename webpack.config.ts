@@ -121,6 +121,8 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         patterns: [
           { from: 'public/export/', to: 'public/' },
           { from: 'public/favicon.ico', noErrorOnMissing: true },
+          { from: 'public/sw-custom.js', noErrorOnMissing: true },
+          { from: 'public/health.json', noErrorOnMissing: true },
         ],
       }),
       new HtmlWebpackPlugin({
@@ -185,7 +187,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         ...config.global.pwa,
       }) as WebpackPluginInstance, // https://github.com/arthurbergmz/webpack-pwa-manifest/pull/151
       new GenerateSW({
-        clientsClaim: true,
+        clientsClaim: false,
         exclude: [
           /\.gitignore/,
         ],
@@ -212,7 +214,8 @@ export default (env: any, argv: { mode: string; }): Configuration => {
           },
           urlPattern: new RegExp('.+'),
         }],
-        skipWaiting: true,
+        skipWaiting: false,
+        importScripts: ['sw-custom.js'],
         swDest: 'sw.js',
       }),
     );
