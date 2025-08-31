@@ -13,6 +13,7 @@ import { di } from './src/di';
 import Server from './src/modules/server/Server';
 import IApplication from './src/interfaces/IApplication';
 import TYPES from './src/types';
+import AssetHashManifestPlugin from './src/plugins/AssetHashManifestPlugin';
 
 function resolvePage(name: string, file: string) {
   return `./src/pages/${name}/${file}`;
@@ -166,6 +167,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
   if (isProd) {
     // @ts-ignore
     webpackConfig.plugins.push(
+      new AssetHashManifestPlugin(),
       new CleanWebpackPlugin(),
       new WebpackPwaManifest({
         background_color: '#fff',
