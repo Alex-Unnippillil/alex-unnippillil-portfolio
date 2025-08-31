@@ -113,6 +113,11 @@ function generateRepositoriesHtml(repositories) {
 <% if (canShowMoreRepositories) {%>
 <script type="text/javascript">
 var repositories = <%= JSON.stringify(repositories.splice(repositoriesMore)) %>;
+var ttPolicy = (window.ttPolicy = window.trustedTypes && window.trustedTypes.createPolicy('default', {
+  createHTML: function (input) {
+    return input;
+  },
+}));
 
 window.addEventListener('DOMContentLoaded', function () {
   var githubRepositories = document.querySelector('.repositories');
@@ -131,7 +136,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 function htmlToElements(html) {
   var template = document.createElement('template');
-  template.innerHTML = html;
+  template.innerHTML = ttPolicy ? ttPolicy.createHTML(html) : html;
   return template.content.childNodes;
 }
 
