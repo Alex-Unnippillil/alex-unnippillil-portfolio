@@ -10,5 +10,6 @@ export default interface IDefaultTemplate extends ITemplate {
      * 0 - display all
      */
     githubRepositoriesMore: number
+    rtl: boolean
   }
 }

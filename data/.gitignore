@@ -1,2 +1,4 @@
 *
 !.gitignore
+!i18n/
+!i18n/messages.json

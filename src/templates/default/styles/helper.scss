@@ -1,6 +1,5 @@
 .mx--auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .text--center {
@@ -42,11 +41,11 @@
     border-bottom: 1px solid #e5e5e5;
   }
   &::before {
-    right: calc(50% + (50px / 2));
+    inset-inline-end: calc(50% + (50px / 2));
     width: 100%;
   }
   &::after {
-    left: calc(50% + (50px / 2));
+    inset-inline-start: calc(50% + (50px / 2));
     width: 100%;
   }
 }

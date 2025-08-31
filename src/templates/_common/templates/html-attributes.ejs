@@ -44,6 +44,7 @@ const app = di.get(TYPES.Application);
 
 const { config } = app;
 const lang = config.global.locale.split('_')[0];
+const isRtl = config.templates[templateName]?.configuration?.rtl;
 %>
 
-lang="<%= lang %>" data-template="<%= templateName %>" time-compiled="<%= Date.now() %>"
+lang="<%= lang %>" dir="<%= isRtl ? 'rtl' : 'ltr' %>" data-template="<%= templateName %>" time-compiled="<%= Date.now() %>"

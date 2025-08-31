@@ -16,6 +16,7 @@ export default (di: Container) => {
     configuration: {
       background: () => require('../assets/background.png'),
       githubRepositoriesMore: 24,
+      rtl: false,
     },
   }) as IDefaultTemplate);
 };
