@@ -90,7 +90,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
           ],
         },
         {
-          test: /\.ts$/,
+          test: /\.tsx?$/,
           use: [
             'babel-loader',
             {
@@ -158,7 +158,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         '@src': path.resolve(__dirname, './src'),
       },
       extensions: [
-        '.ts', '.js', '.json',
+        '.tsx', '.ts', '.js', '.json',
       ],
     },
   };

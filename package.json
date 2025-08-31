@@ -43,10 +43,14 @@
     "@babel/core": "^7.14.0",
     "@babel/plugin-transform-typescript": "^7.13.0",
     "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.13.0",
     "@types/copy-webpack-plugin": "^8.0.0",
     "@types/jest": "^26.0.23",
     "@types/mini-css-extract-plugin": "^1.4.3",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@types/react-router-dom": "^5.3.3",
     "@types/shelljs": "^0.8.8",
     "@types/webpack-dev-server": "^3.11.4",
     "@types/workbox-webpack-plugin": "^5.1.6",
@@ -88,5 +92,11 @@
     "webpack-dev-server": "^3.11.2",
     "webpack-pwa-manifest": "^4.3.0",
     "workbox-webpack-plugin": "^6.1.5"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.12",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.2"
   }
 }
