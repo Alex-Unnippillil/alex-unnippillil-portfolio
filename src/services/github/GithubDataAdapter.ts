@@ -1,11 +1,12 @@
 import IGithubProfile from './interfaces/IGithubProfile';
 import { IConfigDataLink, IConfigData } from '../../interfaces/IConfig';
+import redact from '../../utils/redact';
 
 export default class GithubDataAdapter implements IConfigData {
   private profile: IGithubProfile;
 
   constructor(profile: IGithubProfile) {
-    this.profile = profile;
+    this.profile = redact(profile, ['node_id', 'email']);
   }
 
   get login(): string {

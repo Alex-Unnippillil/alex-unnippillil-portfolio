@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import GithubRequest from '../GithubRequest';
 import IGithubFetcher from '../interfaces/IGithubFetcher';
 import IGithubConfigRepository from '../interfaces/IGithubConfigRepository';
+import redact from '../../../utils/redact';
 
 export default class GithubPrivateFetcher implements IGithubFetcher {
   protected token: string;
@@ -37,5 +38,9 @@ export default class GithubPrivateFetcher implements IGithubFetcher {
         per_page: perPage,
       },
     });
+  }
+
+  public toJSON(): Record<string, unknown> {
+    return redact({ ...this }, ['token']);
   }
 }
