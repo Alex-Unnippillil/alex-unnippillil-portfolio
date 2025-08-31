@@ -22,6 +22,10 @@ export interface IConfigGlobal {
   opg: object
   pwa: ManifestOptions | null
   meta: object
+  features: {
+    sharedArrayBuffer: boolean
+    wasm: boolean
+  }
   www: IConfigGlobalWww
 }
 
