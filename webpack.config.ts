@@ -90,7 +90,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
           ],
         },
         {
-          test: /\.ts$/,
+          test: /\.tsx?$/,
           use: [
             'babel-loader',
             {
@@ -121,6 +121,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         patterns: [
           { from: 'public/export/', to: 'public/' },
           { from: 'public/favicon.ico', noErrorOnMissing: true },
+          { from: 'src/locales', to: 'locales' },
         ],
       }),
       new HtmlWebpackPlugin({
@@ -158,7 +159,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         '@src': path.resolve(__dirname, './src'),
       },
       extensions: [
-        '.ts', '.js', '.json',
+        '.ts', '.tsx', '.js', '.json',
       ],
     },
   };
