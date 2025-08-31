@@ -19,12 +19,13 @@ if (fetcher === undefined) {
 const githubFetcher = new GithubLoggerFetcher(fetcher, logger);
 
 githubFetcher.fetchProfile()
-  .then((profile) => {
+  .then(({ data: profile }) => {
     fs.writeFileSync(
       path.resolve(__dirname, '../../../../data/github-profile.json'),
       JSON.stringify(profile, null, 2),
     );
   })
-  .catch(() => {
+  .catch(({ requestId, error }) => {
+    logger.error(`[${requestId}] ${error.response?.data || error.message}`);
     process.exit(1);
   });

@@ -4,6 +4,7 @@ import IGithubFetcher from './interfaces/IGithubFetcher';
 import IGithubRepository from './interfaces/IGithubRepository';
 import IGithubConfigRepository from './interfaces/IGithubConfigRepository';
 import { TYPES } from '../../types';
+import generateRequestId from '../../utils/requestId';
 
 @injectable()
 export default class GithubRequest {
@@ -17,18 +18,19 @@ export default class GithubRequest {
     this.fetcher = fetcher;
   }
 
-  public fetchProfile(): Promise<IGithubProfile> {
+  public fetchProfile(requestId: string = generateRequestId()): Promise<{ requestId: string; data: IGithubProfile }> {
     return this.fetcher.fetchProfile()
-      .then(({ data }) => data);
+      .then(({ data }) => ({ requestId, data }));
   }
 
   public fetchRepositories(
     params: IGithubConfigRepository,
     page: number,
     perPage: number,
-  ): Promise<IGithubRepository[]> {
+    requestId: string = generateRequestId(),
+  ): Promise<{ requestId: string; data: IGithubRepository[] }> {
     return this.fetcher.fetchRepositories(params, page, perPage)
-      .then(({ data }) => data);
+      .then(({ data }) => ({ requestId, data }));
   }
 
   public async fetchAllRepositories(params: IGithubConfigRepository): Promise<IGithubRepository[]> {
@@ -38,7 +40,11 @@ export default class GithubRequest {
 
     do {
       // eslint-disable-next-line no-await-in-loop
-      repos = await this.fetchRepositories(params, page, GithubRequest.REPOS_MAX_COUNT);
+      ({ data: repos } = await this.fetchRepositories(
+        params,
+        page,
+        GithubRequest.REPOS_MAX_COUNT,
+      ));
 
       repositories.push(...repos);
 
