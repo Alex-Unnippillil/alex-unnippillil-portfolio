@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [4.0.0-beta.0](https://github.com/GPortfolio/GPortfolio/compare/v3.4.1...v4.0.0-beta.0) (2021-06-06)
+### [4.0.0-beta.0](https://github.com/GPortfolio/GPortfolio/compare/v3.4.1...v4.0.0-beta.0) (2021-06-06) [Checklist](release-checklists/release-4.0.0-beta.0.md)
 
 * the whole project has been rewritten
 
