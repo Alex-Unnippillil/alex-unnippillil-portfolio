@@ -4,6 +4,7 @@
 const { di } = require('../../di');
 const { TYPES } = require('../../types');
 const { safeQuotes, resolveFile } = require('../_common/scripts/template');
+const { default: SanitizeText } = require('../../utils/sanitizeText');
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
@@ -18,13 +19,13 @@ function generateRepositoriesHtml(repositories) {
   var output = '';
 
   for (var i = 0; i < repositories.length; i++) {
-    output +=
-      `<a href="${repositories[i].html_url}" class="repository" target="_blank">
-        <div class="repository__name">${repositories[i].full_name}</div>
-        <div class="repository__description">
-          <p>${repositories[i].description || '-'}</p>
-        </div>
-        <div class="repository__footer">
+      output +=
+        `<a href="${repositories[i].html_url}" class="repository" target="_blank" rel="noopener noreferrer">
+          <div class="repository__name">${SanitizeText.sanitize(repositories[i].full_name)}</div>
+          <div class="repository__description">
+            <p>${SanitizeText.sanitize(repositories[i].description || '-')}</p>
+          </div>
+          <div class="repository__footer">
           <div class="repository__footer__language">
             <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="code"><polyline fill="none" stroke="#000" stroke-width="1.01" points="13,4 19,10 13,16"></polyline><polyline fill="none" stroke="#000" stroke-width="1.01" points="7,4 1,10 7,16"></polyline></svg>
             <span>${repositories[i].language || '-'}</span>
@@ -62,17 +63,17 @@ function generateRepositoriesHtml(repositories) {
   <div class="header__background background--image"></div>
   <div class="header__wrap">
     <div class="header__wrap__image avatar--image"></div>
-    <h1 class="header__wrap__name"><%= `${config.data.first_name} ${config.data.last_name}` %></h1>
+      <h1 class="header__wrap__name"><%= SanitizeText.sanitize(`${config.data.first_name} ${config.data.last_name}`) %></h1>
     <% if (config.data.position) { %>
-      <span class="header__wrap__position"><%= config.data.position %></span>
+        <span class="header__wrap__position"><%= SanitizeText.sanitize(config.data.position) %></span>
     <% } %>
     <% if (config.data.links.length > 0) { %>
       <div class="header__wrap__social">
-        <% for (const link of config.data.links) { %>
-          <a href="<%= link.url %>" title="<%= safeQuotes(link.name) %>" rel="nofollow">
-            <%= require(`!!svg-inline-loader!../_common/assets/icons/${link.name}.svg`) %>
-          </a>
-        <% } %>
+          <% for (const link of config.data.links) { if (SanitizeText.isUrlAllowed(link.url)) { %>
+            <a href="<%= link.url %>" title="<%= safeQuotes(SanitizeText.sanitize(link.name)) %>" rel="noopener noreferrer nofollow" target="_blank">
+              <%= require(`!!svg-inline-loader!../_common/assets/icons/${link.name}.svg`) %>
+            </a>
+          <% } } %>
       </div>
     <% } %>
   </div>
