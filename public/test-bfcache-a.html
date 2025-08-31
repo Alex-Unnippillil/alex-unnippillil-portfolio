@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BFCache Test A</title>
+  <script src="./scroll-focus-restoration.js"></script>
+  <script>setupScrollFocusRestoration();</script>
+  <style>body{height:2000px;margin:0;padding:20px;}</style>
+</head>
+<body>
+  <h1>Page A</h1>
+  <p>Scroll down, focus the input, navigate to page B and go back using browser back to test restoration.</p>
+  <a href="test-bfcache-b.html" id="next">Go to Page B</a>
+  <div style="margin-top:1000px;">
+    <input id="focusme" type="text" placeholder="Focus me" />
+  </div>
+</body>
+</html>
