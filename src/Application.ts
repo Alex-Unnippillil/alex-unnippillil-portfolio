@@ -103,6 +103,10 @@ export default class Application implements IApplication {
   get defaultGlobalData(): IConfigGlobal {
     return {
       locale: 'en_US',
+      language: 'en',
+      theme: 'light',
+      density: 'comfortable',
+      motion: 'default',
       opg: {},
       pwa: null,
       meta: {},

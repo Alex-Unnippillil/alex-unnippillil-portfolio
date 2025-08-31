@@ -19,6 +19,10 @@ export default interface IConfig {
 
 export interface IConfigGlobal {
   locale: string
+  language: string
+  theme: 'light' | 'dark'
+  density: 'comfortable' | 'compact'
+  motion: 'default' | 'reduce'
   opg: object
   pwa: ManifestOptions | null
   meta: object
