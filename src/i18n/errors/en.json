@@ -1,0 +1,6 @@
+{
+  "UNKNOWN": "An unexpected error occurred.",
+  "NOT_FOUND": "Requested resource could not be found.",
+  "PERMISSION_DENIED": "You are not allowed to perform this action.",
+  "TIMEOUT": "The request to {{resource}} timed out."
+}
