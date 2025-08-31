@@ -1,3 +1,9 @@
+.repositories-section {
+  content-visibility: auto;
+  contain: layout paint style;
+  contain-intrinsic-size: 1000px;
+}
+
 .repositories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -15,6 +21,7 @@
 }
 
 .repository {
+  contain: layout paint;
   display: flex;
   flex-direction: column;
   color: rgba(0, 0, 0, .9);
