@@ -7,7 +7,7 @@ import path from 'path';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
 import { GenerateSW } from 'workbox-webpack-plugin';
 import fs from 'fs';
-import { WebpackPluginInstance, Configuration } from 'webpack';
+import webpack, { WebpackPluginInstance, Configuration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import { di } from './src/di';
 import Server from './src/modules/server/Server';
@@ -150,6 +150,9 @@ export default (env: any, argv: { mode: string; }): Configuration => {
       new MiniCssExtractPlugin({
         chunkFilename: 'static/css/[name].[fullhash].css',
         filename: 'static/[name].[fullhash].css',
+      }),
+      new webpack.DefinePlugin({
+        'process.env.RELEASE_CHANNEL': JSON.stringify(process.env.RELEASE_CHANNEL || 'production'),
       }),
     ] as WebpackPluginInstance[],
     resolve: {
