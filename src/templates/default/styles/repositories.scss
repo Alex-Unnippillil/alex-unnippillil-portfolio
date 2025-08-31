@@ -68,3 +68,8 @@
     }
   }
 }
+
+.repository__footer__updated.stale .badge {
+  background-color: #ffecec;
+  color: #c00;
+}
