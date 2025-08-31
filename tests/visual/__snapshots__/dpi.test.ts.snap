@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dpiAware retina display 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      2,
+      2,
+    ],
+  ],
+  "canvas": Object {
+    "height": 100,
+    "style": Object {
+      "height": "50px",
+      "width": "100px",
+    },
+    "width": 200,
+  },
+  "ratio": 2,
+}
+`;
+
+exports[`dpiAware standard display 1`] = `
+Object {
+  "calls": Array [
+    Array [
+      1,
+      1,
+    ],
+  ],
+  "canvas": Object {
+    "height": 50,
+    "style": Object {
+      "height": "50px",
+      "width": "100px",
+    },
+    "width": 100,
+  },
+  "ratio": 1,
+}
+`;
