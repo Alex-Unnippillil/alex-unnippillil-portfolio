@@ -1,0 +1,74 @@
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.app-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.app-icon.selected {
+  outline: 2px solid #000;
+}
+
+.app-window {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  display: none;
+  overflow: auto;
+  z-index: 1000;
+}
+
+.app-window.active {
+  display: block;
+}
+
+.command-palette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.command-palette.hidden {
+  display: none;
+}
+
+.command-palette__inner {
+  background: #fff;
+  padding: 1rem;
+  width: 300px;
+}
+
+.command-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.command-results li.selected {
+  background: #eee;
+}
+
