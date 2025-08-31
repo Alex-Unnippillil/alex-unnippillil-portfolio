@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "axios": "/node_modules/axios/dist/axios.min.js",
+    "inversify": "/node_modules/inversify/lib/inversify.js",
+    "reflect-metadata": "/node_modules/reflect-metadata/Reflect.js"
+  }
+}
