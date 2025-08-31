@@ -113,29 +113,30 @@ function generateRepositoriesHtml(repositories) {
 <% if (canShowMoreRepositories) {%>
 <script type="text/javascript">
 var repositories = <%= JSON.stringify(repositories.splice(repositoriesMore)) %>;
+if (typeof window !== 'undefined') {
+  window.addEventListener('DOMContentLoaded', function () {
+    var githubRepositories = document.querySelector('.repositories');
 
-window.addEventListener('DOMContentLoaded', function () {
-  var githubRepositories = document.querySelector('.repositories');
+    document.querySelector('#github-more').addEventListener('click', function () {
+      var html = generateRepositoriesHtml(repositories.splice(0, <%= repositoriesMore %>));
+      var nodes = htmlToElements(html);
 
-  document.querySelector('#github-more').addEventListener('click', function () {
-    var html = generateRepositoriesHtml(repositories.splice(0, <%= repositoriesMore %>));
-    var nodes = htmlToElements(html);
+      if (nodes.length !== <%= repositoriesMore %>) {
+        document.querySelector('#github-more').parentNode.remove();
+      }
 
-    if (nodes.length !== <%= repositoriesMore %>) {
-      document.querySelector('#github-more').parentNode.remove();
-    }
-
-    githubRepositories.append(...nodes);
+      githubRepositories.append(...nodes);
+    });
   });
-});
 
-function htmlToElements(html) {
-  var template = document.createElement('template');
-  template.innerHTML = html;
-  return template.content.childNodes;
+  function htmlToElements(html) {
+    var template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.childNodes;
+  }
+
+  <%= generateRepositoriesHtml.toString() %>
 }
-
-<%= generateRepositoriesHtml.toString() %>
 </script>
 <% } %>
 </body>
