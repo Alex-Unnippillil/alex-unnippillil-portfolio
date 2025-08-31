@@ -7,6 +7,7 @@ import path from 'path';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
 import { GenerateSW } from 'workbox-webpack-plugin';
 import fs from 'fs';
+import { builtinModules } from 'module';
 import { WebpackPluginInstance, Configuration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import { di } from './src/di';
@@ -26,6 +27,20 @@ const { config, url } = di.get<IApplication>(TYPES.Application);
 
 export default (env: any, argv: { mode: string; }): Configuration => {
   const isProd: boolean = argv.mode === 'production';
+
+  const allowlistPath = path.resolve(__dirname, './config/node-allowlist.json');
+  const nodeAllowlist = fs.existsSync(allowlistPath)
+    ? JSON.parse(fs.readFileSync(allowlistPath, 'utf-8'))
+    : {};
+  const nodeFallback: Record<string, string | false> = {};
+  builtinModules.forEach((m: string) => {
+    const clean = m.replace(/^node:/, '');
+    if (Object.prototype.hasOwnProperty.call(nodeAllowlist, clean)) {
+      nodeFallback[clean] = require.resolve(nodeAllowlist[clean]);
+    } else {
+      nodeFallback[clean] = false;
+    }
+  });
 
   const webpackConfig: Configuration = {
     devServer: {
@@ -160,6 +175,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
       extensions: [
         '.ts', '.js', '.json',
       ],
+      fallback: nodeFallback,
     },
   };
 
