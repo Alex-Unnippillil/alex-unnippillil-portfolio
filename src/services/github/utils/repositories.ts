@@ -27,6 +27,7 @@ githubFetcher.fetchAllRepositories(github.configuration.fetcher.repositories)
       JSON.stringify(repositories, null, 2),
     );
   })
-  .catch(() => {
+  .catch(({ requestId, error }) => {
+    logger.error(`[${requestId}] ${error.response?.data || error.message}`);
     process.exit(1);
   });
