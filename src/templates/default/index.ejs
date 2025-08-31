@@ -45,13 +45,15 @@ function generateRepositoriesHtml(repositories) {
 }
 %>
 
-<html <%= require('../_common/templates/html-attributes.ejs')({ templateName: 'default' }) %>>
+<% const htmlAttributes = require('../_common/templates/html-attributes.ejs'); %>
+<html <%= htmlAttributes({ templateName: 'default' }) %>>
 <head>
+  <% htmlAttributes.hints.forEach(origin => { %>
+    <link rel="preconnect" href="<%= origin %>">
+    <link rel="dns-prefetch" href="<%= origin %>">
+  <% }); %>
   <%= require('../_common/templates/header/full.ejs')() %>
   <style>
-    .avatar--image {
-      background: url(<%= resolveFile(config.data.avatar) %>);
-    }
     .background--image {
       background: url(<%= resolveFile(config.templates.default.configuration.background) %>);
     }
@@ -61,7 +63,7 @@ function generateRepositoriesHtml(repositories) {
 <header class="header">
   <div class="header__background background--image"></div>
   <div class="header__wrap">
-    <div class="header__wrap__image avatar--image"></div>
+    <img class="header__wrap__image" src="<%= resolveFile(config.data.avatar) %>" alt="<%= `${config.data.first_name} ${config.data.last_name}` %>" fetchpriority="high" />
     <h1 class="header__wrap__name"><%= `${config.data.first_name} ${config.data.last_name}` %></h1>
     <% if (config.data.position) { %>
       <span class="header__wrap__position"><%= config.data.position %></span>
