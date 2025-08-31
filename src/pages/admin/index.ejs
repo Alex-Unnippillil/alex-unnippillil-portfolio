@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Canary Admin</title>
+</head>
+<body>
+  <h1>Canary Session</h1>
+  <button id="enable-canary">Enable Canary</button>
+  <button id="disable-canary">Disable Canary</button>
+  <script>
+    function setCanary(flag) {
+      document.cookie = 'canary=' + (flag ? 'true' : '') + ';path=/';
+    }
+    document.getElementById('enable-canary').addEventListener('click', function () { setCanary(true); });
+    document.getElementById('disable-canary').addEventListener('click', function () { setCanary(false); });
+  </script>
+</body>
+</html>

@@ -1,1 +1,18 @@
 @import "~normalize.css";
+
+#canary-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: yellow;
+  color: black;
+  padding: 8px;
+  text-align: center;
+  z-index: 1000;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
