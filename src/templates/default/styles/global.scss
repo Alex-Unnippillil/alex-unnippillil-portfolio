@@ -26,3 +26,32 @@ li {
 h1 {
   font-size: 2.625rem;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--scroll-padding-top, 0px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+button.hash-link {
+  margin-left: .5rem;
+  background: none;
+  border: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+h1:hover .hash-link,
+h2:hover .hash-link,
+h3:hover .hash-link,
+h4:hover .hash-link,
+h5:hover .hash-link,
+h6:hover .hash-link,
+button.hash-link:focus {
+  opacity: 1;
+}
