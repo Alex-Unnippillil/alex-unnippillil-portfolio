@@ -93,14 +93,17 @@ export default (env: any, argv: { mode: string; }): Configuration => {
           test: /\.ts$/,
           use: [
             'babel-loader',
-            {
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              compilerOptions: {
+                module: 'esnext',
               },
             },
-          ],
-        },
+          },
+        ],
+      },
         {
           test: /\.ejs$/,
           loader: 'ejs-loader',

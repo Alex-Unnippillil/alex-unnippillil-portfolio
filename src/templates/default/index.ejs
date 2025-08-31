@@ -89,12 +89,17 @@ function generateRepositoriesHtml(repositories) {
             <span>Repositories</span>
           </span>
         </h2>
-        <div class="repositories">
+        <div
+          class="repositories"
+          <% if (canShowMoreRepositories) { %>
+            data-more="<%= safeQuotes(JSON.stringify(repositories.slice(repositoriesMore))) %>"
+          <% } %>
+        >
           <%= generateRepositoriesHtml(canShowMoreRepositories ? repositories.slice(0, repositoriesMore) : repositories) %>
         </div>
         <% if (canShowMoreRepositories) { %>
           <div class="text--center mt-50">
-            <div id="github-more" class="btn-more">Show more</div>
+            <div id="github-more" class="btn-more" data-count="<%= repositoriesMore %>">Show more</div>
           </div>
         <% } %>
       </div>
@@ -109,34 +114,5 @@ function generateRepositoriesHtml(repositories) {
     month: '2-digit'
   }) %></span>
 </footer>
-
-<% if (canShowMoreRepositories) {%>
-<script type="text/javascript">
-var repositories = <%= JSON.stringify(repositories.splice(repositoriesMore)) %>;
-
-window.addEventListener('DOMContentLoaded', function () {
-  var githubRepositories = document.querySelector('.repositories');
-
-  document.querySelector('#github-more').addEventListener('click', function () {
-    var html = generateRepositoriesHtml(repositories.splice(0, <%= repositoriesMore %>));
-    var nodes = htmlToElements(html);
-
-    if (nodes.length !== <%= repositoriesMore %>) {
-      document.querySelector('#github-more').parentNode.remove();
-    }
-
-    githubRepositories.append(...nodes);
-  });
-});
-
-function htmlToElements(html) {
-  var template = document.createElement('template');
-  template.innerHTML = html;
-  return template.content.childNodes;
-}
-
-<%= generateRepositoriesHtml.toString() %>
-</script>
-<% } %>
 </body>
 </html>
