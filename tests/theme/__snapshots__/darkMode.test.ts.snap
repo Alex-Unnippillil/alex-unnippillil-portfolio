@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dark mode theme renders dark tokens 1`] = `
+Object {
+  "background": "#121212",
+  "foreground": "#ffffff",
+}
+`;
