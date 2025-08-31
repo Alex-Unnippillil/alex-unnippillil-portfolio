@@ -19,7 +19,7 @@ function generateRepositoriesHtml(repositories) {
 
   for (var i = 0; i < repositories.length; i++) {
     output +=
-      `<a href="${repositories[i].html_url}" class="repository" target="_blank">
+      `<a href="${repositories[i].html_url}" class="repository" target="_blank" aria-label="Open ${repositories[i].full_name} repository">
         <div class="repository__name">${repositories[i].full_name}</div>
         <div class="repository__description">
           <p>${repositories[i].description || '-'}</p>
@@ -47,6 +47,15 @@ function generateRepositoriesHtml(repositories) {
 
 <html <%= require('../_common/templates/html-attributes.ejs')({ templateName: 'default' }) %>>
 <head>
+  <script>
+    (function() {
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <%= require('../_common/templates/header/full.ejs')() %>
   <style>
     .avatar--image {
@@ -58,6 +67,8 @@ function generateRepositoriesHtml(repositories) {
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Toggle theme</button>
 <header class="header">
   <div class="header__background background--image"></div>
   <div class="header__wrap">
@@ -67,17 +78,17 @@ function generateRepositoriesHtml(repositories) {
       <span class="header__wrap__position"><%= config.data.position %></span>
     <% } %>
     <% if (config.data.links.length > 0) { %>
-      <div class="header__wrap__social">
+      <nav class="header__wrap__social" aria-label="Social links">
         <% for (const link of config.data.links) { %>
-          <a href="<%= link.url %>" title="<%= safeQuotes(link.name) %>" rel="nofollow">
+          <a href="<%= link.url %>" title="<%= safeQuotes(link.name) %>" rel="nofollow" aria-label="<%= safeQuotes(link.name) %>">
             <%= require(`!!svg-inline-loader!../_common/assets/icons/${link.name}.svg`) %>
           </a>
         <% } %>
-      </div>
+      </nav>
     <% } %>
   </div>
 </header>
-<main>
+<main id="main-content" tabindex="-1">
   <% if (repositories.length > 0) { %>
     <section class="repositories-section section">
       <div class="container">
@@ -94,7 +105,7 @@ function generateRepositoriesHtml(repositories) {
         </div>
         <% if (canShowMoreRepositories) { %>
           <div class="text--center mt-50">
-            <div id="github-more" class="btn-more">Show more</div>
+            <button id="github-more" class="btn-more" type="button" aria-label="Show more repositories">Show more</button>
           </div>
         <% } %>
       </div>
@@ -138,5 +149,20 @@ function htmlToElements(html) {
 <%= generateRepositoriesHtml.toString() %>
 </script>
 <% } %>
+<script type="text/javascript">
+(function() {
+  var toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      toggle.setAttribute('aria-pressed', next === 'dark');
+    });
+    toggle.setAttribute('aria-pressed', document.documentElement.getAttribute('data-theme') === 'dark');
+  }
+})();
+</script>
 </body>
 </html>
