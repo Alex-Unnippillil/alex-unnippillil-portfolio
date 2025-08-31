@@ -23,6 +23,7 @@ export interface IConfigGlobal {
   pwa: ManifestOptions | null
   meta: object
   www: IConfigGlobalWww
+  blocklist: string[]
 }
 
 export interface IConfigGlobalWww {

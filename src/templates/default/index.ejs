@@ -3,7 +3,7 @@
 <%
 const { di } = require('../../di');
 const { TYPES } = require('../../types');
-const { safeQuotes, resolveFile } = require('../_common/scripts/template');
+const { safeQuotes, resolveFile, validateUrl } = require('../_common/scripts/template');
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
@@ -19,7 +19,7 @@ function generateRepositoriesHtml(repositories) {
 
   for (var i = 0; i < repositories.length; i++) {
     output +=
-      `<a href="${repositories[i].html_url}" class="repository" target="_blank">
+      `<a href="${validateUrl(repositories[i].html_url, config.global.blocklist) || '#'}" class="repository" target="_blank" rel="noopener noreferrer">
         <div class="repository__name">${repositories[i].full_name}</div>
         <div class="repository__description">
           <p>${repositories[i].description || '-'}</p>
@@ -69,7 +69,7 @@ function generateRepositoriesHtml(repositories) {
     <% if (config.data.links.length > 0) { %>
       <div class="header__wrap__social">
         <% for (const link of config.data.links) { %>
-          <a href="<%= link.url %>" title="<%= safeQuotes(link.name) %>" rel="nofollow">
+          <a href="<%= validateUrl(link.url, config.global.blocklist) || '#' %>" title="<%= safeQuotes(link.name) %>" rel="nofollow noopener noreferrer" target="_blank">
             <%= require(`!!svg-inline-loader!../_common/assets/icons/${link.name}.svg`) %>
           </a>
         <% } %>
