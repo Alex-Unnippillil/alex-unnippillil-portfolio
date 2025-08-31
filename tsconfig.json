@@ -13,6 +13,11 @@
     "jsx": "react",
     "noUnusedLocals": true,
     "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@root/*": ["*"]
+    }
   },
   "exclude": [
     "node_modules",
