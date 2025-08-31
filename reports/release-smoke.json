@@ -1,0 +1,6 @@
+{
+  "unit": { "status": "passed" },
+  "e2e": { "status": "skipped" },
+  "a11y": { "status": "skipped" },
+  "perf": { "status": "skipped" }
+}
