@@ -4,3 +4,5 @@ webpack.config.ts
 .eslintrc.js
 jest.config.js
 coverage/
+playwright.config.ts
+commitlint.config.js
