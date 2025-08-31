@@ -44,6 +44,13 @@ const app = di.get(TYPES.Application);
 
 const { config } = app;
 const lang = config.global.locale.split('_')[0];
+
+const resourceHints = [
+  'https://fonts.googleapis.com',
+  'https://fonts.gstatic.com',
+];
+
+module.exports.hints = resourceHints;
 %>
 
 lang="<%= lang %>" data-template="<%= templateName %>" time-compiled="<%= Date.now() %>"
