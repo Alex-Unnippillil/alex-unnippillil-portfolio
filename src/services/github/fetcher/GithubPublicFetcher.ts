@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import showOfflineMessage from '../../../modules/offline/OfflineFallback';
 import GithubRequest from '../GithubRequest';
 import IGithubFetcher from '../interfaces/IGithubFetcher';
 import IGithubConfigRepository from '../interfaces/IGithubConfigRepository';
@@ -14,7 +15,11 @@ export default class GithubPublicFetcher implements IGithubFetcher {
   }
 
   public fetchProfile(): Promise<AxiosResponse> {
-    return this.axios.get(`${GithubRequest.API}/users/${this.username}`);
+    return this.axios.get(`${GithubRequest.API}/users/${this.username}`)
+      .catch((error) => {
+        showOfflineMessage('Failed to load profile.', () => this.fetchProfile());
+        throw error;
+      });
   }
 
   public fetchRepositories(
@@ -30,6 +35,9 @@ export default class GithubPublicFetcher implements IGithubFetcher {
         page,
         per_page: perPage,
       },
+    }).catch((error) => {
+      showOfflineMessage('Failed to load repositories.', () => this.fetchRepositories(params, page, perPage));
+      throw error;
     });
   }
 }

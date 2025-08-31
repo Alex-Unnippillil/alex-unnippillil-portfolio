@@ -130,3 +130,34 @@ export default class Application implements IApplication {
     };
   }
 }
+
+if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+      const listenForWaitingServiceWorker = (reg: ServiceWorkerRegistration) => {
+        if (reg.waiting) {
+          reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+        reg.addEventListener('updatefound', () => {
+          if (reg.installing) {
+            reg.installing.addEventListener('statechange', () => {
+              if (reg.installing && reg.installing.state === 'installed') {
+                reg.installing.postMessage({ type: 'SKIP_WAITING' });
+              }
+            });
+          }
+        });
+      };
+
+      listenForWaitingServiceWorker(registration);
+    });
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
+  });
+}
