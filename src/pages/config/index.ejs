@@ -1,8 +1,11 @@
-<% require('reflect-metadata'); %>
+<%
+require('reflect-metadata');
+const messages = require('../../../data/i18n/messages.json');
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>GPortfolio - Settings</title>
+    <title><%= messages['settings.title'] %></title>
     <style>
     @font-face {
         font-family: 'JetBrainsMono';
@@ -57,30 +60,29 @@
 <!--</section>-->
 <section>
     <div class="section--name">
-        Global
+        <%= messages['settings.section.global'] %>
     </div>
     <div class="section--items">
         <div class="block">
             <div class="block--label">
-                Template
+                <%= messages['settings.label.template'] %>
             </div>
             <div class="block--input">
                 <input/>
             </div>
             <div class="block--description">
-                Select an existing template
+                <%= messages['settings.description.selectTemplate'] %>
             </div>
         </div>
         <div class="block">
             <div class="block--label">
-                Base
+                <%= messages['settings.label.base'] %>
             </div>
             <div class="block--input">
                 <input/>
             </div>
             <div class="block--description">
-                If the repository is called: &lt;username&gt;.github.io. Then the value is empty
-                If the repository is called: portfolio, or any other name. Then the value of &lt;name of repository&gt;
+                <%= messages['settings.description.base'] %>
             </div>
         </div>
     </div>

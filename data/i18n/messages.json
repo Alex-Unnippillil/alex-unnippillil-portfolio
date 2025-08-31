@@ -1,0 +1,12 @@
+{
+  "settings.title": "GPortfolio - Settings",
+  "settings.section.global": "Global",
+  "settings.label.template": "Template",
+  "settings.description.selectTemplate": "Select an existing template",
+  "settings.label.base": "Base",
+  "settings.description.base": "If the repository is called: \u003cusername\u003e.github.io. Then the value is empty If the repository is called: portfolio, or any other name. Then the value of \u003cname of repository\u003e",
+  "repositories.title": "Repositories",
+  "repositories.showMore": "Show more",
+  "meta.generator": "GPortfolio",
+  "meta.portfolioBy": "Portfolio by"
+}

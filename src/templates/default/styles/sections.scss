@@ -1,10 +1,8 @@
 .container {
   box-sizing: content-box;
   max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin-inline: auto;
+  padding-inline: 15px;
 }
 
 .section {
@@ -22,16 +20,16 @@
       display: flex;
       align-items: center;
       > .icon {
-        margin-right: 10px;
+        margin-inline-end: 10px;
       }
       &::after {
         content: "";
         position: absolute;
         top: calc(50% - ((.2px + .05em)/ 2));
-        left: 100%;
+        inset-inline-start: 100%;
         width: 2000px;
         border-bottom: calc(.2px + .05em) solid #e5e5e5;
-        margin-left: calc(5px + .3em);
+        margin-inline-start: calc(5px + .3em);
       }
     }
   }

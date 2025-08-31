@@ -2,6 +2,7 @@
 const { resolveFile } = require('../../scripts/template');
 const { di } = require('../../../../di');
 const { TYPES } = require('../../../../types');
+const messages = require('../../../../../data/i18n/messages.json');
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
@@ -9,7 +10,7 @@ const app = di.get(TYPES.Application);
 const { config, url } = app;
 %>
 
-<meta property="og:title" content="Portfolio by <%= `${config.data.first_name} ${config.data.last_name}` %>" />
+<meta property="og:title" content="<%= messages['meta.portfolioBy'] %> <%= `${config.data.first_name} ${config.data.last_name}` %>" />
 <meta property="og:type" content="profile" />
 <meta property="og:image" content="<%= resolveFile(config.data.avatar) %>" />
 <meta property="og:url" content="<%= url %>" />

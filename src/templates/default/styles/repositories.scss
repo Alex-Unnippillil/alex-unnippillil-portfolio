@@ -49,11 +49,11 @@
       display: flex;
       align-items: center;
       &:not(:last-child) {
-        margin-right: 15px;
+        margin-inline-end: 15px;
       }
       svg {
         width: 15px;
-        margin-right: 5px;
+        margin-inline-end: 5px;
       }
     }
   }
