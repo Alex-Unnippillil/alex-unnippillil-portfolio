@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@e7aeea1772ec01da74cafda11c5caa463520ca59
+        with:
+          fail-on-severity: critical
+          deny-licenses: GPL-1.0,GPL-2.0,GPL-3.0,AGPL-1.0,AGPL-3.0,LGPL-2.1,LGPL-3.0
+
+      - name: Use Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '14'
+
+      - name: Verify lockfile
+        run: yarn install --immutable
+
+      - name: Audit dependencies
+        run: yarn npm audit --all --severity critical
+
+      - name: Run eslint
+        run: yarn lint
+
+      - name: Run tests
+        run: yarn test --coverage
+
+      - name: Build project
+        run: yarn build
+
+      - name: Generate dependency attestation
+        run: |
+          echo "commit: $GITHUB_SHA" > attestation.txt
+          npm list --depth=0 >> attestation.txt
+          cat attestation.txt
+
+      - name: Upload attestation artifact
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5
+        with:
+          name: build-attestation
+          path: attestation.txt
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@92c65d2898f1f53cfdc910b962cecff86e7f8fcc
+        with:
+          subject-path: dist
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457
