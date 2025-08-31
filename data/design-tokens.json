@@ -1,0 +1,14 @@
+{
+  "pairs": [
+    {
+      "name": "textOnLight",
+      "foreground": "#0a0a0a",
+      "background": "#ffffff"
+    },
+    {
+      "name": "textOnDark",
+      "foreground": "#ffffff",
+      "background": "#1a1a1a"
+    }
+  ]
+}
