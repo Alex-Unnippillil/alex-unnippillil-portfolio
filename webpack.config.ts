@@ -39,7 +39,7 @@ export default (env: any, argv: { mode: string; }): Configuration => {
       inline: true,
       watchContentBase: true,
     } as DevServerConfiguration,
-    devtool: isProd ? false : 'source-map',
+    devtool: isProd ? 'hidden-source-map' : 'source-map',
     entry: {
       main: isProd
         ? [
