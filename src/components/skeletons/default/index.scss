@@ -1,0 +1,40 @@
+@import '../_base';
+
+.default-skeleton {
+  padding: 16px;
+}
+
+.default-skeleton__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.name {
+  width: 60%;
+  height: 24px;
+  margin-bottom: 8px;
+}
+
+.position {
+  width: 40%;
+  height: 18px;
+}
+
+.default-skeleton__repositories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.repo {
+  height: 120px;
+}
