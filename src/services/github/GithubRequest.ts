@@ -4,6 +4,7 @@ import IGithubFetcher from './interfaces/IGithubFetcher';
 import IGithubRepository from './interfaces/IGithubRepository';
 import IGithubConfigRepository from './interfaces/IGithubConfigRepository';
 import { TYPES } from '../../types';
+import RequestQueue from '../../utils/RequestQueue';
 
 @injectable()
 export default class GithubRequest {
@@ -11,14 +12,20 @@ export default class GithubRequest {
 
   public static REPOS_MAX_COUNT = 100;
 
+  public static queue = new RequestQueue();
+
   protected fetcher: IGithubFetcher;
 
   constructor(@inject(TYPES.GithubFetcher) fetcher: IGithubFetcher) {
     this.fetcher = fetcher;
   }
 
+  public static setConcurrency(endpoint: string, limit: number): void {
+    GithubRequest.queue.setConcurrency(endpoint, limit);
+  }
+
   public fetchProfile(): Promise<IGithubProfile> {
-    return this.fetcher.fetchProfile()
+    return GithubRequest.queue.enqueue('profile', () => this.fetcher.fetchProfile())
       .then(({ data }) => data);
   }
 
@@ -27,7 +34,7 @@ export default class GithubRequest {
     page: number,
     perPage: number,
   ): Promise<IGithubRepository[]> {
-    return this.fetcher.fetchRepositories(params, page, perPage)
+    return GithubRequest.queue.enqueue('repositories', () => this.fetcher.fetchRepositories(params, page, perPage))
       .then(({ data }) => data);
   }
 
