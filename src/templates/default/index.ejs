@@ -4,15 +4,17 @@
 const { di } = require('../../di');
 const { TYPES } = require('../../types');
 const { safeQuotes, resolveFile } = require('../_common/scripts/template');
+const { can } = require('../../utils/policy');
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
 
 const { config } = app;
+const user = config.user || {};
 
 const repositories = config.services.github.data.repositories;
 const repositoriesMore = config.templates.default.configuration.githubRepositoriesMore;
-const canShowMoreRepositories = repositoriesMore && repositoriesMore < repositories.length;
+const canShowMoreRepositories = repositoriesMore && repositoriesMore < repositories.length && can(user, 'view', 'repositories.more');
 
 function generateRepositoriesHtml(repositories) {
   var output = '';
