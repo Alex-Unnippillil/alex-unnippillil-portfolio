@@ -92,6 +92,7 @@ function generateRepositoriesHtml(repositories) {
         <div class="repositories">
           <%= generateRepositoriesHtml(canShowMoreRepositories ? repositories.slice(0, repositoriesMore) : repositories) %>
         </div>
+        <div class="batch-actions">Actions for selected items</div>
         <% if (canShowMoreRepositories) { %>
           <div class="text--center mt-50">
             <div id="github-more" class="btn-more">Show more</div>
