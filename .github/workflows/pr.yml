@@ -27,6 +27,9 @@ jobs:
       - name: Run eslint
         run: yarn lint
 
+      - name: Check for hard coded colors
+        run: yarn check:colors
+
       - name: Run tests
         run: yarn test --coverage
 

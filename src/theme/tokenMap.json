@@ -1,0 +1,20 @@
+{
+  "#232931": "var(--color-primary)",
+  "#393e46": "var(--color-secondary)",
+  "#4ecca3": "var(--color-active)",
+  "#eee": "var(--color-background)",
+  "#fff": "var(--color-white)",
+  "#000": "var(--color-black)",
+  "#b1b1b1": "var(--color-gray-400)",
+  "#333": "var(--color-gray-800)",
+  "#b2b2b2": "var(--color-gray-350)",
+  "#e5e5e5": "var(--color-gray-200)",
+  "#474a73": "var(--color-indigo-700)",
+  "#3B5998": "var(--color-facebook)",
+  "#181717": "var(--color-github)",
+  "#E4405F": "var(--color-instagram)",
+  "#0077B5": "var(--color-linkedin)",
+  "#DA552F": "var(--color-producthunt)",
+  "#FE7A16": "var(--color-stackoverflow)",
+  "#1DA1F2": "var(--color-twitter)"
+}
