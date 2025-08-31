@@ -1,0 +1,12 @@
+{
+  "/": {
+    "desktop": {
+      "longTaskDuration": 200,
+      "maxMemory": 200000000
+    },
+    "mobile": {
+      "longTaskDuration": 300,
+      "maxMemory": 300000000
+    }
+  }
+}
