@@ -4,8 +4,11 @@ import { IConfigGlobalWww } from '../../interfaces/IConfig';
 export default class SiteUrlResolver {
   private www: IConfigGlobalWww;
 
-  constructor(www: IConfigGlobalWww) {
+  private locale: string;
+
+  constructor(www: IConfigGlobalWww, locale: string) {
     this.www = www;
+    this.locale = locale;
   }
 
   public resolve() {
@@ -17,10 +20,8 @@ export default class SiteUrlResolver {
   }
 
   protected get path() {
-    if (!this.www.path) {
-      return '';
-    }
-
-    return StringUtils.ltrim(`/${this.www.path}`, '/');
+    const lang = this.locale.split('_')[0];
+    const basePath = this.www.path ? `/${StringUtils.ltrim(this.www.path, '/')}` : '';
+    return `/${lang}${basePath}`;
   }
 }

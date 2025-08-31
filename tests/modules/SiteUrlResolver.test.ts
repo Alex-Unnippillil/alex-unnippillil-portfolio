@@ -6,9 +6,9 @@ describe('SiteUrlResolver', () => {
       domain: 'example.com',
       path: '/',
       protocol: 'https',
-    });
+    }, 'en_US');
 
-    expect(siteUrlResolver.resolve()).toBe('https://example.com');
+    expect(siteUrlResolver.resolve()).toBe('https://example.com/en');
   });
 
   it('Without last slash', () => {
@@ -16,8 +16,8 @@ describe('SiteUrlResolver', () => {
       domain: 'example.com',
       path: '/path',
       protocol: 'https',
-    });
+    }, 'en_US');
 
-    expect(siteUrlResolver.resolve()).toBe('https://example.com/path');
+    expect(siteUrlResolver.resolve()).toBe('https://example.com/en/path');
   });
 });

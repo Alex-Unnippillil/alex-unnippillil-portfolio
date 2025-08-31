@@ -4,11 +4,14 @@
 const { di } = require('../../di');
 const { TYPES } = require('../../types');
 const { safeQuotes, resolveFile } = require('../_common/scripts/template');
+const useI18n = require('../../utils/i18n').default;
+const { formatDate } = require('../../utils/format');
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
 
 const { config } = app;
+const { t } = useI18n(config.global.locale);
 
 const repositories = config.services.github.data.repositories;
 const repositoriesMore = config.templates.default.configuration.githubRepositoriesMore;
@@ -86,7 +89,7 @@ function generateRepositoriesHtml(repositories) {
             <span class="icon">
               <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="grid"><rect x="2" y="2" width="3" height="3"></rect><rect x="8" y="2" width="3" height="3"></rect><rect x="14" y="2" width="3" height="3"></rect><rect x="2" y="8" width="3" height="3"></rect><rect x="8" y="8" width="3" height="3"></rect><rect x="14" y="8" width="3" height="3"></rect><rect x="2" y="14" width="3" height="3"></rect><rect x="8" y="14" width="3" height="3"></rect><rect x="14" y="14" width="3" height="3"></rect></svg>
             </span>
-            <span>Repositories</span>
+            <span><%= t('repositories') %></span>
           </span>
         </h2>
         <div class="repositories">
@@ -94,7 +97,7 @@ function generateRepositoriesHtml(repositories) {
         </div>
         <% if (canShowMoreRepositories) { %>
           <div class="text--center mt-50">
-            <div id="github-more" class="btn-more">Show more</div>
+            <div id="github-more" class="btn-more"><%= t('showMore') %></div>
           </div>
         <% } %>
       </div>
@@ -103,7 +106,7 @@ function generateRepositoriesHtml(repositories) {
 </main>
 <footer>
   <hr class="divider-icon">
-  <span><%= new Date().toLocaleDateString(undefined, {
+  <span><%= formatDate(new Date(), config.global.locale, {
     year: 'numeric',
     day: '2-digit',
     month: '2-digit'

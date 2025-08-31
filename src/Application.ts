@@ -44,7 +44,7 @@ export default class Application implements IApplication {
 
     this.services.forEach((service) => service.applyConfigurations(this));
 
-    this.siteUrl = new SiteUrlResolver(this.config.global.www).resolve();
+    this.siteUrl = new SiteUrlResolver(this.config.global.www, this.config.global.locale).resolve();
   }
 
   get config(): IConfig {
