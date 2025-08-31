@@ -26,7 +26,8 @@
   "author": "Alexey Khrushch <alexeykhr@outlook.com>",
   "scripts": {
     "dev": "webpack serve --hot --progress --mode=development",
-    "build": "webpack --mode=production",
+    "generate-openapi": "ts-node scripts/generate-openapi.ts",
+    "build": "yarn generate-openapi --check && webpack --mode=production",
     "lint": "eslint --ext .js,.ts .",
     "lint:fix": "yarn lint --fix",
     "release": "yarn standard-version",
@@ -39,6 +40,7 @@
     "not IE 11"
   ],
   "devDependencies": {
+    "@asteasolutions/zod-to-openapi": "^8.1.0",
     "@babel/core": "^7.14.0",
     "@babel/plugin-transform-typescript": "^7.13.0",
     "@babel/preset-env": "^7.14.1",
@@ -69,6 +71,7 @@
     "inversify": "^5.1.1",
     "jest": "^27.0.3",
     "mini-css-extract-plugin": "^1.6.0",
+    "msw": "^2.11.0",
     "node-sass": "^5.0.0",
     "normalize.css": "^8.0.1",
     "postcss-loader": "^5.2.0",
@@ -86,6 +89,7 @@
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-pwa-manifest": "^4.3.0",
-    "workbox-webpack-plugin": "^6.1.5"
+    "workbox-webpack-plugin": "^6.1.5",
+    "zod": "^4.1.5"
   }
 }
