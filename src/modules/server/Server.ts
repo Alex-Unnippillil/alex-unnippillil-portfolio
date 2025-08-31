@@ -1,6 +1,7 @@
 import { Compiler } from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { Application } from 'express';
+import registerGraphQL from '../../server/graphql';
 
 export default class Server {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -9,5 +10,6 @@ export default class Server {
     //   const response = await build();
     //   resp.json(response);
     // });
+    registerGraphQL(app);
   }
 }

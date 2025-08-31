@@ -1,0 +1,2 @@
+/** @typedef {{}} ViewerData */
+/** @typedef {{}} ViewerVariables */
