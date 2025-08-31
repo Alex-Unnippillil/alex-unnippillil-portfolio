@@ -9,6 +9,7 @@ import { TYPES } from '../../types';
 import IApplication from '../../interfaces/IApplication';
 import IGithubProfile from './interfaces/IGithubProfile';
 import IGithubRepository from './interfaces/IGithubRepository';
+import redact from '../../utils/redact';
 
 @injectable()
 export default class GithubService implements IService {
@@ -37,9 +38,14 @@ export default class GithubService implements IService {
   }
 
   public configuration(): IGithub {
+    const profile = this.profileData
+      ? redact(this.profileData, ['node_id', 'email'])
+      : undefined;
+    const repositories = this.repositoriesData.map((repo) => redact(repo, ['node_id']));
+
     return {
       configuration: {
-        nickname: this.profileData ? this.profileData.login : '',
+        nickname: profile ? profile.login : '',
         fetcher: {
           repositories: {
             type: 'owner',
@@ -57,8 +63,8 @@ export default class GithubService implements IService {
         },
       },
       data: {
-        profile: this.profileData,
-        repositories: this.repositoriesData,
+        profile,
+        repositories,
       },
     };
   }
