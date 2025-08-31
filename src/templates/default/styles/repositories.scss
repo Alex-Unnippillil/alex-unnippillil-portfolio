@@ -68,3 +68,19 @@
     }
   }
 }
+.repository.selected {
+  outline: 2px solid #474a73;
+}
+
+.selection-box {
+  position: absolute;
+  border: 1px dashed #474a73;
+  background: rgba(71, 74, 115, 0.1);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.batch-actions {
+  display: none;
+  margin-top: 20px;
+}
