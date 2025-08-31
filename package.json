@@ -46,6 +46,8 @@
     "@types/copy-webpack-plugin": "^8.0.0",
     "@types/jest": "^26.0.23",
     "@types/mini-css-extract-plugin": "^1.4.3",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
     "@types/shelljs": "^0.8.8",
     "@types/webpack-dev-server": "^3.11.4",
     "@types/workbox-webpack-plugin": "^5.1.6",
@@ -78,6 +80,7 @@
     "shelljs": "^0.8.4",
     "style-loader": "^2.0.0",
     "svg-inline-loader": "^0.8.2",
+    "tailwindcss": "3.3.3",
     "ts-jest": "^27.0.1",
     "ts-loader": "^9.1.2",
     "ts-node": "^10.0.0",
@@ -87,5 +90,11 @@
     "webpack-dev-server": "^3.11.2",
     "webpack-pwa-manifest": "^4.3.0",
     "workbox-webpack-plugin": "^6.1.5"
+  },
+  "dependencies": {
+    "class-variance-authority": "0.7.0",
+    "framer-motion": "10.16.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
