@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "axios": "https://cdn.jsdelivr.net/npm/axios@0.21.1/+esm",
+    "inversify": "https://cdn.jsdelivr.net/npm/inversify@5.1.1/+esm",
+    "reflect-metadata": "https://cdn.jsdelivr.net/npm/reflect-metadata@0.1.13/+esm"
+  }
+}
