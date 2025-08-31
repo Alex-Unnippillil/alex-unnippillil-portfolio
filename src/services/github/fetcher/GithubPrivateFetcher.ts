@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import GithubRequest from '../GithubRequest';
 import IGithubFetcher from '../interfaces/IGithubFetcher';
 import IGithubConfigRepository from '../interfaces/IGithubConfigRepository';
+import retry from '../../../utils/network/retry';
 
 export default class GithubPrivateFetcher implements IGithubFetcher {
   protected token: string;
@@ -18,7 +19,7 @@ export default class GithubPrivateFetcher implements IGithubFetcher {
   }
 
   public fetchProfile(): Promise<AxiosResponse> {
-    return this.axios.get(`${GithubRequest.API}/user`);
+    return retry(() => this.axios.get(`${GithubRequest.API}/user`));
   }
 
   public fetchRepositories(
@@ -26,7 +27,7 @@ export default class GithubPrivateFetcher implements IGithubFetcher {
     page = 1,
     perPage: number = GithubRequest.REPOS_MAX_COUNT,
   ): Promise<AxiosResponse> {
-    return this.axios.get(`${GithubRequest.API}/user/repos`, {
+    return retry(() => this.axios.get(`${GithubRequest.API}/user/repos`, {
       params: {
         affiliation: params.affiliation.length ? params.affiliation.join(',') : undefined,
         visibility: params.visibility,
@@ -36,6 +37,6 @@ export default class GithubPrivateFetcher implements IGithubFetcher {
         page,
         per_page: perPage,
       },
-    });
+    }));
   }
 }
