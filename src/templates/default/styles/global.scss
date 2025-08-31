@@ -2,6 +2,15 @@
   box-sizing: border-box;
 }
 
+html.fade-transition {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+html.fade-transition.fade-in {
+  opacity: 1;
+}
+
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: 14px;

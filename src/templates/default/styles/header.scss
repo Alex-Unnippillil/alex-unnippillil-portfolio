@@ -13,6 +13,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     will-change: background-position;
+    view-transition-name: hero-background;
     &:before {
       content: "";
       position: absolute;
@@ -33,6 +34,7 @@
       background-position: 50% 50%;
       background-repeat: no-repeat;
       background-size: cover;
+      view-transition-name: hero-image;
     }
     &__name {
       margin: 35px 0 5px;
@@ -41,6 +43,7 @@
       font-weight: 600;
       font-size: 2.4rem;
       letter-spacing: 1px;
+      view-transition-name: hero-name;
       @media only screen and (max-width: 768px) {
         font-size: 1.8rem;
       }
