@@ -1,3 +1,77 @@
 <head>
     <%= require('./full.ejs')() %>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var docEl = document.documentElement;
+
+            function appendJsonLd(attr) {
+                var data = docEl.getAttribute(attr);
+                if (!data) return;
+                try {
+                    var script = document.createElement('script');
+                    script.type = 'application/ld+json';
+                    script.text = data;
+                    document.head.appendChild(script);
+                } catch (e) {}
+            }
+
+            appendJsonLd('data-jsonld-website');
+
+            var path = window.location.pathname.replace(/\/$/, '');
+            var segments = path.split('/').filter(function (s) { return s; });
+            var breadcrumbItems = [];
+            if (segments.length) {
+                var nav = document.createElement('nav');
+                nav.setAttribute('aria-label', 'Breadcrumb');
+                var ol = document.createElement('ol');
+                nav.appendChild(ol);
+                var cumulative = '';
+                segments.forEach(function (seg, idx) {
+                    cumulative += '/' + seg;
+                    var li = document.createElement('li');
+                    var name = decodeURIComponent(seg);
+                    if (idx < segments.length - 1) {
+                        var a = document.createElement('a');
+                        a.href = cumulative;
+                        a.textContent = name;
+                        li.appendChild(a);
+                    } else {
+                        li.textContent = name;
+                    }
+                    ol.appendChild(li);
+                    breadcrumbItems.push({
+                        '@type': 'ListItem',
+                        position: idx + 1,
+                        name: name,
+                        item: cumulative,
+                    });
+                });
+                document.body.insertBefore(nav, document.body.firstChild);
+            }
+
+            var breadcrumbData = docEl.getAttribute('data-jsonld-breadcrumb');
+            if (breadcrumbData) {
+                try {
+                    var breadcrumbObj = JSON.parse(breadcrumbData);
+                    breadcrumbObj.itemListElement = breadcrumbItems;
+                    var breadcrumbScript = document.createElement('script');
+                    breadcrumbScript.type = 'application/ld+json';
+                    breadcrumbScript.text = JSON.stringify(breadcrumbObj);
+                    document.head.appendChild(breadcrumbScript);
+                } catch (e) {}
+            }
+
+            var articleData = docEl.getAttribute('data-jsonld-article');
+            if (articleData) {
+                try {
+                    var articleObj = JSON.parse(articleData);
+                    articleObj.headline = document.title;
+                    var articleScript = document.createElement('script');
+                    articleScript.type = 'application/ld+json';
+                    articleScript.text = JSON.stringify(articleObj);
+                    document.head.appendChild(articleScript);
+                } catch (e) {}
+            }
+        });
+    </script>
 </head>
