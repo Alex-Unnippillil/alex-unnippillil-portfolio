@@ -69,11 +69,8 @@
   text-transform: uppercase;
   background-color: transparent;
   cursor: pointer;
-  transition: .1s ease-in-out;
-  transition-property: color,background-color,border-color;
+  transition: opacity .1s ease-in-out;
   &:hover {
-    background-color: transparent;
-    color: #333;
-    border-color: #b2b2b2;
+    opacity: .8;
   }
 }

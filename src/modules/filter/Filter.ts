@@ -2,6 +2,7 @@ import { inject, injectable } from 'inversify';
 import IFilterItem from './interfaces/IFilterItem';
 import FilterCompare from './FilterCompare';
 import ObjectUtils from '../../utils/ObjectUtils';
+import { markStart, markEnd } from '../../utils/performance';
 
 @injectable()
 export default class Filter {
@@ -17,11 +18,14 @@ export default class Filter {
       return arr;
     }
 
-    return arr.filter((item) => groupFilters.some((group) => group.every((filter) => {
+    markStart('filter-handle');
+    const result = arr.filter((item) => groupFilters.some((group) => group.every((filter) => {
       const values = ObjectUtils.deepKeyFromString(item, filter.attr, separator);
       const res = this.filterCompare.compare(filter.values, values, filter.options || {});
 
       return (res || filter.revert) && (!res || !filter.revert);
     })));
+    markEnd('filter-handle');
+    return result;
   }
 }
