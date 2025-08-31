@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "strict": true,
+    "jsx": "preserve",
   },
   "exclude": [
     "node_modules",
