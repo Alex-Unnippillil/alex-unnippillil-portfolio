@@ -48,10 +48,18 @@ function generateRepositoriesHtml(repositories) {
 <html <%= require('../_common/templates/html-attributes.ejs')({ templateName: 'default' }) %>>
 <head>
   <%= require('../_common/templates/header/full.ejs')() %>
+<%
+  const { default: GithubRequest } = require('../../services/github/GithubRequest');
+  const preconnectOrigins = new Set([new URL(GithubRequest.API).origin]);
+  const avatarUrl = resolveFile(config.data.avatar);
+  if (avatarUrl.startsWith('http')) preconnectOrigins.add(new URL(avatarUrl).origin);
+  const bgUrl = resolveFile(config.templates.default.configuration.background);
+  if (bgUrl.startsWith('http')) preconnectOrigins.add(new URL(bgUrl).origin);
+%>
+  <% for (const origin of preconnectOrigins) { %>
+  <link rel="preconnect" href="<%= origin %>" crossorigin>
+  <% } %>
   <style>
-    .avatar--image {
-      background: url(<%= resolveFile(config.data.avatar) %>);
-    }
     .background--image {
       background: url(<%= resolveFile(config.templates.default.configuration.background) %>);
     }
@@ -61,7 +69,7 @@ function generateRepositoriesHtml(repositories) {
 <header class="header">
   <div class="header__background background--image"></div>
   <div class="header__wrap">
-    <div class="header__wrap__image avatar--image"></div>
+    <img class="header__wrap__image" src="<%= resolveFile(config.data.avatar) %>" fetchpriority="high" alt="<%= `${config.data.first_name} ${config.data.last_name}` %>">
     <h1 class="header__wrap__name"><%= `${config.data.first_name} ${config.data.last_name}` %></h1>
     <% if (config.data.position) { %>
       <span class="header__wrap__position"><%= config.data.position %></span>
@@ -138,5 +146,23 @@ function htmlToElements(html) {
 <%= generateRepositoriesHtml.toString() %>
 </script>
 <% } %>
+<script>
+  (function(origins){
+    function logEarlyConnections(){
+      origins.forEach(function(origin){
+        var entries = performance.getEntriesByType('resource');
+        var entry = entries.find(function(e){ return e.name && e.name.startsWith(origin); });
+        if (entry){
+          console.log('Preconnect to ' + origin + ' took ' + (entry.connectEnd - entry.connectStart) + 'ms');
+        }
+      });
+    }
+    if (document.readyState === 'complete'){
+      logEarlyConnections();
+    } else {
+      window.addEventListener('load', logEarlyConnections);
+    }
+  })(<%- JSON.stringify(Array.from(preconnectOrigins)) %>);
+</script>
 </body>
 </html>

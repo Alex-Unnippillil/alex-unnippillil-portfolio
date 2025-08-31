@@ -30,9 +30,8 @@
       height: 200px;
       margin: 0 auto;
       border-radius: 20px;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: cover;
+      display: block;
+      object-fit: cover;
     }
     &__name {
       margin: 35px 0 5px;
