@@ -10,4 +10,9 @@ export default class StringUtils {
       ? str.substring(0, str.length - 1)
       : str;
   }
+
+  static softHyphenate(str: string, size = 10): string {
+    const reg = new RegExp(`(\\S{${size}})(?=\\S)`, 'g');
+    return str.replace(reg, '$1\u00AD');
+  }
 }

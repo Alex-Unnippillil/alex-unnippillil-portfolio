@@ -20,4 +20,12 @@ describe('StringUtils', () => {
       expect(url).toBe('https://example.com');
     });
   });
+
+  describe('softHyphenate', () => {
+    it('inserts soft hyphens into long tokens', () => {
+      const input = 'abcdefghijK';
+      const result = StringUtils.softHyphenate(input, 5);
+      expect(result).toBe('abcde\u00ADfghij\u00ADK');
+    });
+  });
 });
