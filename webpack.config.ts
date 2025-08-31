@@ -102,6 +102,10 @@ export default (env: any, argv: { mode: string; }): Configuration => {
           ],
         },
         {
+          test: /\.md$/,
+          type: 'asset/source',
+        },
+        {
           test: /\.ejs$/,
           loader: 'ejs-loader',
           options: {

@@ -1,0 +1,36 @@
+.whats-new {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  max-width: 320px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  z-index: 1000;
+}
+
+.whats-new__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.whats-new__close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.whats-new__section h3 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1rem;
+}
+
+.whats-new__section ul {
+  margin: 0 0 0.5rem 1rem;
+  padding: 0;
+}
