@@ -8,6 +8,7 @@ const TYPES = {
   FilterCompareItems: Symbol.for('filter.compare.items'),
   Services: Symbol.for('services'),
   Templates: Symbol.for('templates'),
+  HeadManager: Symbol.for('head.manager'),
 
   ...githubService,
 };

@@ -2,23 +2,24 @@
 const { resolveFile } = require('../../scripts/template');
 const { di } = require('../../../../di');
 const { TYPES } = require('../../../../types');
+const headManager = di.get(TYPES.HeadManager);
 
 /** @type {IApplication} */
 const app = di.get(TYPES.Application);
 
 const { config, url } = app;
-%>
 
-<meta property="og:title" content="Portfolio by <%= `${config.data.first_name} ${config.data.last_name}` %>" />
-<meta property="og:type" content="profile" />
-<meta property="og:image" content="<%= resolveFile(config.data.avatar) %>" />
-<meta property="og:url" content="<%= url %>" />
-<% if (config.data.bio) { %><meta property="og:description" content="<%= config.data.bio %>" /><% } %>
-<% if (config.global.locale) { %><meta property="og:locale" content="<%= config.global.locale %>" /><% } %>
-<% if (config.data.first_name) { %><meta property="profile:first_name" content="<%= config.data.first_name %>"><% } %>
-<% if (config.data.last_name) { %><meta property="profile:last_name" content="<%= config.data.last_name %>"><% } %>
-<% if (config.data.login) { %><meta property="profile:username" content="<%= config.data.login %>" /><% } %>
-<% if (config.data.gender) { %><meta property="profile:gender" content="<%= config.data.gender %>"><% } %>
-<% for (let [property, content] of Object.entries(config.global.opg)) { %>
-    <meta property="<%= property %>" content="<%= content %>" />
-<% } %>
+headManager.metaProperty('og:title', `Portfolio by ${config.data.first_name} ${config.data.last_name}`);
+headManager.metaProperty('og:type', 'profile');
+headManager.metaProperty('og:image', resolveFile(config.data.avatar));
+headManager.metaProperty('og:url', url);
+if (config.data.bio) headManager.metaProperty('og:description', config.data.bio);
+if (config.global.locale) headManager.metaProperty('og:locale', config.global.locale);
+if (config.data.first_name) headManager.metaProperty('profile:first_name', config.data.first_name);
+if (config.data.last_name) headManager.metaProperty('profile:last_name', config.data.last_name);
+if (config.data.login) headManager.metaProperty('profile:username', config.data.login);
+if (config.data.gender) headManager.metaProperty('profile:gender', config.data.gender);
+for (let [property, content] of Object.entries(config.global.opg)) {
+    headManager.metaProperty(property, content);
+}
+%>

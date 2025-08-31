@@ -18,6 +18,7 @@ import IApplication from './interfaces/IApplication';
 import Application from './Application';
 import config from '../config';
 import IConfig from './interfaces/IConfig';
+import HeadManager from './modules/head/HeadManager';
 
 const di = new Container();
 
@@ -36,6 +37,8 @@ di.bind<IFilterCompareItem>(TYPES.FilterCompareItems).to(RegExpCompareItem);
 
 di.bind<ILogger>(TYPES.Logger).to(ConsoleLogger);
 di.bind<IPrefixLogger>(TYPES.LoggerPrefix).toDynamicValue(() => new ConsolePrefixLogger('application'));
+
+di.bind<HeadManager>(TYPES.HeadManager).to(HeadManager).inSingletonScope();
 
 // Services
 githubService(di);

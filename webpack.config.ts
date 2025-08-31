@@ -128,7 +128,6 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         inject: 'head',
         chunks: ['main'],
         meta: {
-          description: `Portfolio by ${config.data.first_name} ${config.data.last_name}`,
           robots: 'index, follow',
           viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
           ...config.global.meta,

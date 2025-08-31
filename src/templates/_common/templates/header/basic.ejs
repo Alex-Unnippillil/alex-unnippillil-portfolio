@@ -3,12 +3,15 @@ const { di } = require('../../../../di');
 const { TYPES } = require('../../../../types');
 
 /** @type {IApplication} */
-const app = di.get(TYPES.Application)
+const app = di.get(TYPES.Application);
+const headManager = di.get(TYPES.HeadManager);
 
-const { config, template } = app;
+const { config, template, url } = app;
+
+headManager.canonical(url);
+headManager.title(`${config.data.first_name} ${config.data.last_name}`);
+headManager.metaName('generator', 'GPortfolio');
+headManager.metaName('author', template.info.author);
+headManager.metaName('description', `Portfolio by ${config.data.first_name} ${config.data.last_name}`);
 %>
-
 <meta charset="utf-8">
-<meta name="generator" content="GPortfolio">
-<meta name="author" content="<%= template.info.author %>">
-<title><%= `${config.data.first_name} ${config.data.last_name}` %></title>
