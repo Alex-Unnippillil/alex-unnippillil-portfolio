@@ -4,3 +4,4 @@ webpack.config.ts
 .eslintrc.js
 jest.config.js
 coverage/
+next.config.js
