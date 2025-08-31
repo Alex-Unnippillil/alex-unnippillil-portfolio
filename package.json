@@ -29,10 +29,11 @@
     "build": "webpack --mode=production",
     "lint": "eslint --ext .js,.ts .",
     "lint:fix": "yarn lint --fix",
-    "release": "yarn standard-version",
+    "release": "yarn locales:check && yarn standard-version",
     "github:profile": "ts-node ./src/services/github/utils/profile.ts",
     "github:repositories": "ts-node ./src/services/github/utils/repositories.ts",
-    "test": "jest"
+    "test": "jest",
+    "locales:check": "ts-node --transpile-only scripts/check-locales.ts"
   },
   "browserslist": [
     "defaults",
