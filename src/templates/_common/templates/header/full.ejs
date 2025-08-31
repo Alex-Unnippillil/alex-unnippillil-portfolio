@@ -1,2 +1,14 @@
+<%
+const { di } = require('../../../../di');
+const { TYPES } = require('../../../../types');
+
+/** @type {IApplication} */
+const app = di.get(TYPES.Application);
+
+const { config, url } = app;
+const hreflang = config.global.locale.replace('_', '-');
+%>
 <%= require('./basic.ejs')() %>
 <%= require('./opg.ejs')() %>
+<link rel="canonical" href="<%= url %>" />
+<link rel="alternate" href="<%= url %>" hreflang="<%= hreflang %>">
