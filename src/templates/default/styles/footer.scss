@@ -1,5 +1,6 @@
 footer {
   margin-bottom: 30px;
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   text-align: center;
   font-size: .6rem;
   letter-spacing: 2px;

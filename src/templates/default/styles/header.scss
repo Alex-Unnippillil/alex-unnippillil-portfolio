@@ -1,7 +1,8 @@
 .header {
   position: relative;
   min-height: 500px;
-  padding: 70px 20px;
+  padding: calc(70px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
+           calc(70px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
   &__background {
     position: absolute;
     top: 0;
@@ -61,13 +62,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 35px;
-        height: 35px;
-        padding: 9px;
-        margin: 0 7px;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        margin: 0 8px;
         color: #fff;
         transition: .2s;
-        min-width: 35px;
+        min-width: 44px;
         &:hover {
           background: rgba(0, 0, 0, .5);
           border-radius: 10px;
