@@ -7,7 +7,7 @@ import path from 'path';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
 import { GenerateSW } from 'workbox-webpack-plugin';
 import fs from 'fs';
-import { WebpackPluginInstance, Configuration } from 'webpack';
+import webpack, { WebpackPluginInstance, Configuration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import { di } from './src/di';
 import Server from './src/modules/server/Server';
@@ -123,6 +123,14 @@ export default (env: any, argv: { mode: string; }): Configuration => {
           { from: 'public/favicon.ico', noErrorOnMissing: true },
         ],
       }),
+      new webpack.EnvironmentPlugin({
+        MAINTENANCE_MODE: 'false',
+        STATUS_URL: '',
+        INCIDENT_MESSAGE: '',
+        INCIDENT_ACTION: '',
+        BUILD_ID: '',
+        COMMIT_SHA: '',
+      }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
         inject: 'head',
@@ -214,6 +222,15 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         }],
         skipWaiting: true,
         swDest: 'sw.js',
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'maintenance.html',
+        inject: false,
+        template: resolvePage('maintenance', 'index.ejs'),
+        minify: {
+          collapseWhitespace: true,
+          removeComments: true,
+        },
       }),
     );
   } else {
