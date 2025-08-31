@@ -1,0 +1,46 @@
+---
+title: Help
+faqs:
+  - question: "What is GPortfolio?"
+    answer: "An open source portfolio generator."
+  - question: "How to use this site?"
+    answer: "Configure and build."
+---
+
+# Help
+
+Welcome to the help page.
+
+<script id="faq-data" type="application/json">
+{
+  "faqs": [
+    {"question": "What is GPortfolio?", "answer": "An open source portfolio generator."},
+    {"question": "How to use this site?", "answer": "Configure and build."}
+  ]
+}
+</script>
+<script>
+(function () {
+  var el = document.getElementById('faq-data');
+  if (!el) return;
+  try {
+    var frontMatter = JSON.parse(el.textContent);
+    if (!frontMatter.faqs) return;
+    var schema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": frontMatter.faqs.map(function (faq) {
+        return {
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+        };
+      })
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.text = JSON.stringify(schema);
+    document.head.appendChild(s);
+  } catch (e) {}
+})();
+</script>

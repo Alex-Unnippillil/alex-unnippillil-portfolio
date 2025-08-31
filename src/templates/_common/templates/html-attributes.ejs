@@ -44,6 +44,32 @@ const app = di.get(TYPES.Application);
 
 const { config } = app;
 const lang = config.global.locale.split('_')[0];
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  url: app.url,
+  name: `${config.data.first_name} ${config.data.last_name}`.trim(),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [],
+};
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '',
+};
+
+function escapeAttr(value) {
+  return value.replace(/"/g, '&quot;');
+}
 %>
 
 lang="<%= lang %>" data-template="<%= templateName %>" time-compiled="<%= Date.now() %>"
+data-jsonld-website="<%- escapeAttr(JSON.stringify(websiteJsonLd)) %>"
+data-jsonld-breadcrumb="<%- escapeAttr(JSON.stringify(breadcrumbJsonLd)) %>"
+data-jsonld-article="<%- escapeAttr(JSON.stringify(articleJsonLd)) %>"
