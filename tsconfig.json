@@ -5,9 +5,10 @@
       "es6",
       "dom"
     ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "jsx": "react",
+      "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "jsx": "react",
