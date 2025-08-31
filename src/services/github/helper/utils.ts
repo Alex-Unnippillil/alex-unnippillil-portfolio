@@ -4,10 +4,15 @@ import { di } from '../../../di';
 import IApplication from '../../../interfaces/IApplication';
 import { TYPES } from '../../../types';
 import GithubPublicFetcher from '../fetcher/GithubPublicFetcher';
+import GithubDemoFetcher from '../fetcher/GithubDemoFetcher';
 
 // eslint-disable-next-line import/prefer-default-export
 export function parseGithubFetcher(): IGithubFetcher | undefined {
   const args = process.argv.slice(2);
+
+  if (process.env.DEMO_MODE === 'true') {
+    return new GithubDemoFetcher();
+  }
 
   if (args.length && args[0]) {
     return new GithubPrivateFetcher(args[0]);

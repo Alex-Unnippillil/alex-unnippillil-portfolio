@@ -250,6 +250,15 @@ $ yarn github:profile ACCESS_TOKEN
 $ yarn github:repositories ACCESS_TOKEN
 ```
 
+## Demo mode
+
+Run the project with example data and without any network calls:
+
+```shell
+$ yarn demo           # start dev server with demo content
+$ yarn demo:exit      # remove demo data and return to normal mode
+```
+
 ## How to contribute
 
 Please make sure to read the [Contributing Guide](https://github.com/GPortfolio/GPortfolio/blob/main/.github/CONTRIBUTING.md) before making a pull request.

@@ -32,6 +32,9 @@
     "release": "yarn standard-version",
     "github:profile": "ts-node ./src/services/github/utils/profile.ts",
     "github:repositories": "ts-node ./src/services/github/utils/repositories.ts",
+    "demo:init": "ts-node ./src/demo/init.ts",
+    "demo:exit": "ts-node ./src/demo/exit.ts",
+    "demo": "DEMO_MODE=true yarn demo:init && DEMO_MODE=true yarn dev",
     "test": "jest"
   },
   "browserslist": [
