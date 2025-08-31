@@ -4,8 +4,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
-import WebpackPwaManifest from 'webpack-pwa-manifest';
-import { GenerateSW } from 'workbox-webpack-plugin';
+import { InjectManifest } from 'workbox-webpack-plugin';
 import fs from 'fs';
 import { WebpackPluginInstance, Configuration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
@@ -22,7 +21,7 @@ function resolveTemplate(name: string, file: string) {
   return `./src/templates/${name}/${file}`;
 }
 
-const { config, url } = di.get<IApplication>(TYPES.Application);
+const { config } = di.get<IApplication>(TYPES.Application);
 
 export default (env: any, argv: { mode: string; }): Configuration => {
   const isProd: boolean = argv.mode === 'production';
@@ -121,6 +120,8 @@ export default (env: any, argv: { mode: string; }): Configuration => {
         patterns: [
           { from: 'public/export/', to: 'public/' },
           { from: 'public/favicon.ico', noErrorOnMissing: true },
+          { from: 'public/app/manifest.webmanifest', to: 'app/manifest.webmanifest', noErrorOnMissing: true },
+          { from: 'public/icons', to: 'icons', noErrorOnMissing: true },
         ],
       }),
       new HtmlWebpackPlugin({
@@ -167,53 +168,10 @@ export default (env: any, argv: { mode: string; }): Configuration => {
     // @ts-ignore
     webpackConfig.plugins.push(
       new CleanWebpackPlugin(),
-      new WebpackPwaManifest({
-        background_color: '#fff',
-        description: `Portfolio by ${config.data.first_name} ${config.data.last_name}`,
-        filename: 'static/manifest.[hash].json',
-        icons: [
-          {
-            destination: 'static/icons',
-            sizes: [96, 128, 192, 256, 384, 512],
-            src: path.resolve(__dirname, './src/assets/project/icon.png'), // TODO config.data.avatar
-          },
-        ],
-        name: `${config.data.first_name} ${config.data.last_name}`,
-        short_name: `${config.data.first_name} ${config.data.last_name}`,
-        start_url: url,
-        theme_color: '#fff',
-        ...config.global.pwa,
-      }) as WebpackPluginInstance, // https://github.com/arthurbergmz/webpack-pwa-manifest/pull/151
-      new GenerateSW({
-        clientsClaim: true,
-        exclude: [
-          /\.gitignore/,
-        ],
-        navigateFallback: '/index.html',
-        navigateFallbackAllowlist: [
-          /^static/, /^public/, /^sw\.js$/, /^index\.html$/, /^favicon\.ico$/,
-        ],
-        runtimeCaching: [{
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'github-content',
-          },
-          urlPattern: new RegExp('^https:\/\/.*\.githubusercontent\.com\/'),
-        }, {
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'github-api',
-          },
-          urlPattern: new RegExp('^https:\/\/api\.github\.com\/'),
-        }, {
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'other-websites',
-          },
-          urlPattern: new RegExp('.+'),
-        }],
-        skipWaiting: true,
-        swDest: 'sw.js',
+      new InjectManifest({
+        swSrc: path.resolve(__dirname, './src/service-worker.ts'),
+        swDest: 'service-worker.js',
+        exclude: [/\.gitignore/],
       }),
     );
   } else {
