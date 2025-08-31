@@ -4,6 +4,7 @@ import { di } from '../../../di';
 import IApplication from '../../../interfaces/IApplication';
 import { TYPES } from '../../../types';
 import GithubPublicFetcher from '../fetcher/GithubPublicFetcher';
+import { envMap } from '../../../env';
 
 // eslint-disable-next-line import/prefer-default-export
 export function parseGithubFetcher(): IGithubFetcher | undefined {
@@ -13,8 +14,8 @@ export function parseGithubFetcher(): IGithubFetcher | undefined {
     return new GithubPrivateFetcher(args[0]);
   }
 
-  if (process.env.GITHUB_TOKEN) {
-    return new GithubPrivateFetcher(process.env.GITHUB_TOKEN);
+  if (envMap.server.GITHUB_TOKEN) {
+    return new GithubPrivateFetcher(envMap.server.GITHUB_TOKEN);
   }
 
   const { github } = di.get<IApplication>(TYPES.Application).config.services;
