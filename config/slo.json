@@ -1,0 +1,5 @@
+{
+  "/": { "availability": 0.99, "latency": 300 },
+  "/about": { "availability": 0.99, "latency": 300 },
+  "/projects": { "availability": 0.95, "latency": 400 }
+}
