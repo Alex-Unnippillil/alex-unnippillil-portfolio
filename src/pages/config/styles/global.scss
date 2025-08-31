@@ -1,8 +1,9 @@
 :root {
-  --primary: #232931;
-  --secondary: #393e46;
-  --active: #4ecca3;
-  --background: #eee;
+  --surface: #232931;
+  --overlay: #2f343d;
+  --border: #4b5563;
+  --muted: #9ca3af;
+  --brand: #4ecca3;
 }
 
 * {
@@ -10,21 +11,21 @@
 }
 
 html {
-  background-color: var(--primary);
+  background-color: var(--surface);
 }
 
 body {
   font-family: JetBrainsMono, monospace;
   font-size: 13px;
   line-height: 1.2;
-  color: #fff;
+  color: var(--muted);
 }
 
 input {
-  border: 0;
+  border: 1px solid var(--border);
   outline: 0;
   padding: 7px 10px;
-  background-color: #393e46;
+  background-color: var(--overlay);
   border-radius: 5px;
-  color: #fff;
+  color: var(--brand);
 }
