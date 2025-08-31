@@ -85,5 +85,18 @@
         </div>
     </div>
 </section>
+<footer class="footer-controls">
+    <button class="footer-controls__save">Save</button>
+</footer>
+
+<script>
+if ('virtualKeyboard' in navigator) {
+    navigator.virtualKeyboard.overlaysContent = true;
+    navigator.virtualKeyboard.addEventListener('geometrychange', (event) => {
+        const { height } = event.target.boundingRect;
+        document.documentElement.style.setProperty('--vk-height', `${height}px`);
+    });
+}
+</script>
 </body>
 </html>

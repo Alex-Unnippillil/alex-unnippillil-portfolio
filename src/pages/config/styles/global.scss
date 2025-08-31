@@ -3,6 +3,7 @@
   --secondary: #393e46;
   --active: #4ecca3;
   --background: #eee;
+  --vk-height: 0px;
 }
 
 * {
@@ -11,6 +12,8 @@
 
 html {
   background-color: var(--primary);
+  height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 body {
@@ -18,6 +21,8 @@ body {
   font-size: 13px;
   line-height: 1.2;
   color: #fff;
+  min-height: 100%;
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--vk-height));
 }
 
 input {
@@ -27,4 +32,15 @@ input {
   background-color: #393e46;
   border-radius: 5px;
   color: #fff;
+}
+
+.footer-controls {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + var(--vk-height));
+  background-color: var(--secondary);
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
