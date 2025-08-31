@@ -7,12 +7,13 @@ import path from 'path';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
 import { GenerateSW } from 'workbox-webpack-plugin';
 import fs from 'fs';
-import { WebpackPluginInstance, Configuration } from 'webpack';
+import webpack, { WebpackPluginInstance, Configuration } from 'webpack';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import { di } from './src/di';
 import Server from './src/modules/server/Server';
 import IApplication from './src/interfaces/IApplication';
 import TYPES from './src/types';
+import { envMap } from './src/env';
 
 function resolvePage(name: string, file: string) {
   return `./src/pages/${name}/${file}`;
@@ -117,6 +118,9 @@ export default (env: any, argv: { mode: string; }): Configuration => {
       publicPath: '/',
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(envMap.client),
+      }),
       new CopyWebpackPlugin({
         patterns: [
           { from: 'public/export/', to: 'public/' },
