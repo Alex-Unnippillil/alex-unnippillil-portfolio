@@ -1,1 +1,5 @@
 @import "~normalize.css";
+
+[data-drop-target].drop-target--active {
+  outline: 2px dashed #409eff;
+}
