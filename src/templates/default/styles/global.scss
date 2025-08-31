@@ -26,3 +26,27 @@ li {
 h1 {
   font-size: 2.625rem;
 }
+
+/* Accessible scrollbar styling */
+.scroll-container {
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #555 #e0e0e0;
+  scrollbar-width: auto;
+}
+
+.scroll-container::-webkit-scrollbar {
+  background-color: #e0e0e0;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 6px;
+  border: 3px solid #e0e0e0;
+}
+
+.scroll-container:focus {
+  outline: 2px solid #474a73;
+  outline-offset: 2px;
+}
+
