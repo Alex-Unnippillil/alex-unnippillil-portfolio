@@ -38,6 +38,7 @@ Automatic portfolio creation based on Github profile.
 - Rename the forked repository to **\<username>.github.io** | *[Settings -> Repository name]*
 - Enable Github Actions and `profile.yml` for autodeploy | *[Actions tab -> profile.yml]*
 - [Generate new access token](https://github.com/settings/tokens/new) and add this value to the repository settings as `ACCESS_TOKEN` | *[Settings -> Secret]*
+- Use Vercel Environment Variables to store tokens and other secrets. Never expose these values in client components.
 - Fill the [`config.ts`](#config) file in root directory with your data and push changes
 - Change Github page to `gh-pages` branch | *[Settings -> Pages -> Source]*
 - Open the site (**\<username>.github.io**)
