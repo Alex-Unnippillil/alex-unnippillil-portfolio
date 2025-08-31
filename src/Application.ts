@@ -111,6 +111,7 @@ export default class Application implements IApplication {
         path: '',
         protocol: 'https',
       },
+      blocklist: [],
     };
   }
 

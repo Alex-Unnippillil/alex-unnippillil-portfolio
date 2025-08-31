@@ -15,3 +15,5 @@ export function resolveFile(url: string | Function): string {
 
   return url().default;
 }
+
+export { default as sanitize, validateUrl } from '../../utils/sanitize';
