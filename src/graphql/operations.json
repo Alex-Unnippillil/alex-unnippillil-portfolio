@@ -1,0 +1,3 @@
+{
+  "d49d5eefe323696b5cc6447e1c448cf3fbfa657100d7d6296a4912b30d24e4f2": "query Viewer {\n  viewer {\n    login\n  }\n}"
+}

@@ -32,7 +32,8 @@
     "release": "yarn standard-version",
     "github:profile": "ts-node ./src/services/github/utils/profile.ts",
     "github:repositories": "ts-node ./src/services/github/utils/repositories.ts",
-    "test": "jest"
+    "test": "jest",
+    "graphql:codegen": "node scripts/graphql-codegen.js"
   },
   "browserslist": [
     "defaults",
