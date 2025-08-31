@@ -25,36 +25,7 @@
     </style>
 </head>
 <body>
-<!--<section>-->
-<!--    <div class="section&#45;&#45;name">-->
-<!--        Global-->
-<!--    </div>-->
-<!--    <div class="section&#45;&#45;items">-->
-<!--        <div class="block">-->
-<!--            <div class="block&#45;&#45;label">-->
-<!--                Template-->
-<!--            </div>-->
-<!--            <div class="block&#45;&#45;input">-->
-<!--                <input />-->
-<!--            </div>-->
-<!--            <div class="block&#45;&#45;description">-->
-<!--                Select an existing template-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="block">-->
-<!--            <div class="block&#45;&#45;label">-->
-<!--                Base-->
-<!--            </div>-->
-<!--            <div class="block&#45;&#45;input">-->
-<!--                <input />-->
-<!--            </div>-->
-<!--            <div class="block&#45;&#45;description">-->
-<!--                If the repository is called: &lt;username&gt;.github.io. Then the value is empty-->
-<!--                If the repository is called: portfolio, or any other name. Then the value of &lt;name of repository&gt;-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+<form id="settings-form">
 <section>
     <div class="section--name">
         Global
@@ -85,5 +56,46 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="section--name">
+        Demo
+    </div>
+    <div class="section--items">
+        <div class="block">
+            <div class="block--label">
+                Start Date
+            </div>
+            <div class="block--input">
+                <input id="start-date" type="date"/>
+            </div>
+            <div class="block--description">
+                ISO format YYYY-MM-DD
+            </div>
+        </div>
+        <div class="block">
+            <div class="block--label">
+                Start Time
+            </div>
+            <div class="block--input">
+                <input id="start-time" type="time"/>
+            </div>
+            <div class="block--description">
+                ISO format HH:MM
+            </div>
+        </div>
+        <div class="block">
+            <div class="block--label">
+                Project Count
+            </div>
+            <div class="block--input">
+                <input id="project-count" type="number" min="0" max="99"/>
+            </div>
+            <div class="block--description">
+                Rounded and clamped between 0 and 99
+            </div>
+        </div>
+    </div>
+</section>
+</form>
 </body>
 </html>
