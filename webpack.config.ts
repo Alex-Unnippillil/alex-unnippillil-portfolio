@@ -22,6 +22,20 @@ function resolveTemplate(name: string, file: string) {
   return `./src/templates/${name}/${file}`;
 }
 
+function collectPages(dir: string, prefix = ''): string[] {
+  return fs.readdirSync(dir).flatMap((name) => {
+    const fullPath = path.join(dir, name);
+    const relative = prefix ? `${prefix}/${name}` : name;
+    if (fs.statSync(fullPath).isDirectory()) {
+      if (fs.existsSync(path.join(fullPath, 'index.ts'))) {
+        return [relative];
+      }
+      return collectPages(fullPath, relative);
+    }
+    return [];
+  });
+}
+
 const { config, url } = di.get<IApplication>(TYPES.Application);
 
 export default (env: any, argv: { mode: string; }): Configuration => {
@@ -217,21 +231,22 @@ export default (env: any, argv: { mode: string; }): Configuration => {
       }),
     );
   } else {
-    fs.readdirSync(path.resolve(__dirname, './src/pages'))
-      .forEach((folder: string) => {
+    collectPages(path.resolve(__dirname, './src/pages'))
+      .forEach((page: string) => {
+        const chunk = page.replace(/\//g, '_');
         // @ts-ignore
-        webpackConfig.entry[folder] = [
-          resolvePage(folder, 'index.ts'),
-          resolvePage(folder, 'index.scss'),
+        webpackConfig.entry[chunk] = [
+          resolvePage(page, 'index.ts'),
+          resolvePage(page, 'index.scss'),
         ];
 
         // @ts-ignore
         webpackConfig.plugins.push(
           new HtmlWebpackPlugin({
-            filename: `${folder}.html`,
+            filename: `${page}/index.html`,
             inject: 'head',
-            chunks: [folder],
-            template: resolvePage(folder, 'index.ejs'),
+            chunks: [chunk],
+            template: resolvePage(page, 'index.ejs'),
           }),
         );
       });

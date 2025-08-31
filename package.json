@@ -87,5 +87,9 @@
     "webpack-dev-server": "^3.11.2",
     "webpack-pwa-manifest": "^4.3.0",
     "workbox-webpack-plugin": "^6.1.5"
+  },
+  "dependencies": {
+    "@xstate/inspect": "^0.8.0",
+    "xstate": "^5.21.0"
   }
 }
