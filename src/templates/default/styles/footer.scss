@@ -1,5 +1,5 @@
 footer {
-  margin-bottom: 30px;
+  margin-bottom: calc(var(--space-8) * var(--density));
   text-align: center;
   font-size: .6rem;
   letter-spacing: 2px;
