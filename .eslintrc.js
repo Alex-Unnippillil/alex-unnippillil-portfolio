@@ -1,3 +1,16 @@
+const glossary = require('./glossary.json');
+
+const restrictedTerms = Object.entries(glossary).flatMap(([wrong, right]) => [
+  {
+    selector: `Literal[value=/\\b${wrong}\\b/]`,
+    message: `Use '${right}' instead of '${wrong}'.`,
+  },
+  {
+    selector: `TemplateElement[value.raw=/\\b${wrong}\\b/]`,
+    message: `Use '${right}' instead of '${wrong}'.`,
+  },
+]);
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -16,5 +29,6 @@ module.exports = {
     'global-require': 0,
     'class-methods-use-this': 0,
     'import/no-extraneous-dependencies': 0,
+    'no-restricted-syntax': ['error', ...restrictedTerms],
   },
 };

@@ -14,7 +14,7 @@ export default class GithubLoggerFetcher extends GithubRequest {
   constructor(fetcher: IGithubFetcher, @inject(TYPES.LoggerPrefix) logger: IPrefixLogger) {
     super(fetcher);
     this.logger = logger;
-    this.logger.setPrefix('Github');
+    this.logger.setPrefix('GitHub');
     this.logger.debug(`Using ${fetcher.constructor.name}`);
   }
 
