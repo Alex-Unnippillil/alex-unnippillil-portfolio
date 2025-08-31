@@ -62,6 +62,7 @@ function generateRepositoriesHtml(repositories) {
   <div class="header__background background--image"></div>
   <div class="header__wrap">
     <div class="header__wrap__image avatar--image"></div>
+    <img id="logo" class="header__wrap__logo" alt="logo" />
     <h1 class="header__wrap__name"><%= `${config.data.first_name} ${config.data.last_name}` %></h1>
     <% if (config.data.position) { %>
       <span class="header__wrap__position"><%= config.data.position %></span>
