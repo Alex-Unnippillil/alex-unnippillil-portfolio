@@ -3,6 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
+    'import',
   ],
   extends: [
     'airbnb-typescript/base',
@@ -16,5 +17,8 @@ module.exports = {
     'global-require': 0,
     'class-methods-use-this': 0,
     'import/no-extraneous-dependencies': 0,
+    'import/no-internal-modules': ['error', {
+      forbid: ['axios/**', 'inversify/**', 'reflect-metadata/**'],
+    }],
   },
 };
