@@ -16,5 +16,8 @@ module.exports = {
     'global-require': 0,
     'class-methods-use-this': 0,
     'import/no-extraneous-dependencies': 0,
+    'import/no-internal-modules': ['error', {
+      allow: ['**/src/**', '**/tests/**']
+    }],
   },
 };
