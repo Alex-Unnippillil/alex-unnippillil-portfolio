@@ -1,1 +1,64 @@
 @import "~normalize.css";
+
+.code-block {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.code-block__toolbar {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-bottom: 0.25rem;
+}
+
+.code-block__copy,
+.code-block__lines-toggle {
+  font-size: 0.75rem;
+}
+
+.code-block__pre {
+  overflow-x: auto;
+}
+
+.code-block__pre:focus {
+  outline: 2px solid #aaa;
+}
+
+.code-block__line {
+  display: block;
+}
+
+.code-block--numbered code {
+  counter-reset: line;
+}
+
+.code-block--numbered .code-block__line {
+  counter-increment: line;
+}
+
+.code-block--numbered .code-block__line::before {
+  content: counter(line);
+  display: inline-block;
+  width: 2em;
+  margin-right: 1em;
+  color: #888;
+  text-align: right;
+}
+
+.code-block__toast {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #333;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.code-block__toast--visible {
+  opacity: 1;
+}
