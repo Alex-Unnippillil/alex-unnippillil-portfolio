@@ -1,2 +1,12 @@
+<%
+const { di } = require('../../../../di');
+const { TYPES } = require('../../../../types');
+const headManager = di.get(TYPES.HeadManager);
+
+headManager.reset();
+%>
 <%= require('./basic.ejs')() %>
-<%= require('./opg.ejs')() %>
+<%
+require('./opg.ejs')();
+%>
+<%= headManager.render() %>
